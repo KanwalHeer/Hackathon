@@ -1,20 +1,30 @@
-document.addEventListener('DOMContentLoaded', function () {
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+document.addEventListener('DOMContentLoaded', () => {
     // Navigation toggle
-    var navToggle = document.getElementById('nav-toggle');
-    var navLinks = document.getElementById('nav-links');
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
     if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function () {
+        navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
     }
-    var navLinksItems = document.querySelectorAll('nav ul li a');
-    navLinksItems.forEach(function (link) {
-        link.addEventListener('click', function (e) {
+    const navLinksItems = document.querySelectorAll('nav ul li a');
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            var href = link.getAttribute('href');
+            const href = link.getAttribute('href');
             if (href) {
-                var targetId = href.substring(1);
-                var targetElement = document.getElementById(targetId);
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
@@ -28,10 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
     // Skills toggle
-    var toggleSkillsButton = document.getElementById('toggle-skills');
-    var skillsContent = document.getElementById('skills-content');
+    const toggleSkillsButton = document.getElementById('toggle-skills');
+    const skillsContent = document.getElementById('skills-content');
     if (toggleSkillsButton && skillsContent) {
-        toggleSkillsButton.addEventListener('click', function () {
+        toggleSkillsButton.addEventListener('click', () => {
             if (skillsContent.classList.contains('hidden')) {
                 skillsContent.classList.remove('hidden');
                 toggleSkillsButton.textContent = 'Hide Skills';
@@ -42,126 +52,212 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    // Resume generation
-    var submitButton = document.getElementById('submit-all');
-    var resumeOutput = document.getElementById('resume-output');
-    var resumeContent = document.getElementById('resume-content');
-    var downloadResumeButton = document.getElementById('download-resume');
-    if (submitButton && resumeOutput && resumeContent && downloadResumeButton) {
-        submitButton.addEventListener('click', function () {
-            var _a;
-            // Capture the form data
-            var nameInput = document.getElementById('name');
-            var emailInput = document.getElementById('email');
-            var phoneInput = document.getElementById('phone');
-            var addressInput = document.getElementById('address');
-            var photoInput = document.getElementById('photo');
-            var institutionInput = document.getElementById('institution');
-            var degreeInput = document.getElementById('degree');
-            var graduationDateInput = document.getElementById('graduation-date');
-            var skillsInput = document.getElementById('skills');
-            var companyInput = document.getElementById('company');
-            var positionInput = document.getElementById('position');
-            var startDateInput = document.getElementById('start-date');
-            var endDateInput = document.getElementById('end-date');
-            var responsibilitiesInput = document.getElementById('responsibilities');
-            var aboutInput = document.getElementById('about-me');
-            // Basic validation
-            if (!nameInput || !emailInput || !phoneInput || !addressInput ||
-                !institutionInput || !degreeInput || !graduationDateInput ||
-                !skillsInput || !companyInput || !positionInput ||
-                !startDateInput || !endDateInput || !responsibilitiesInput) {
-                alert('Please ensure all required fields are present.');
-                return;
-            }
-            var name = nameInput.value.trim();
-            var email = emailInput.value.trim();
-            var phone = phoneInput.value.trim();
-            var address = addressInput.value.trim();
-            var photo = photoInput && ((_a = photoInput.files) === null || _a === void 0 ? void 0 : _a[0]) ? URL.createObjectURL(photoInput.files[0]) : '';
-            var institution = institutionInput.value.trim();
-            var degree = degreeInput.value.trim();
-            var graduationDate = graduationDateInput.value.trim();
-            var skills = skillsInput.value.trim();
-            var company = companyInput.value.trim();
-            var position = positionInput.value.trim();
-            var startDate = startDateInput.value.trim();
-            var endDate = endDateInput.value.trim();
-            var responsibilities = responsibilitiesInput.value.trim();
-            var about = aboutInput ? aboutInput.value.trim() : '';
-            // Validate if all fields are filled
-            if (!name || !email || !phone || !address || !institution ||
-                !degree || !graduationDate || !skills || !company ||
-                !position || !startDate || !endDate || !responsibilities) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            // Validate email
-            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-            // Validate phone number (simple check for digits and length)
-            var phonePattern = /^\d{10,15}$/; // Adjust based on expected phone number format
-            if (!phonePattern.test(phone)) {
-                alert('Please enter a valid phone number.');
-                return;
-            }
-            // Validate dates (simple check)
-            if (new Date(startDate) > new Date(endDate)) {
-                alert('End date cannot be before the start date.');
-                return;
-            }
-            // Generate the resume HTML with styling
-            var resumeHTML = "\n                <div class=\"static-resume\">\n                    <div class=\"resume-header\">\n                      \n                        ".concat(photo ? "<img src=\"".concat(photo, "\" alt=\"Photo\" />") : '', "\n                         <h1>").concat(name, "</h1>\n                        <p>Email: ").concat(email, "</p>\n                        <p>Phone: ").concat(phone, "</p>\n                        <p>Address: ").concat(address, "</p>\n                    </div>\n                    <div class=\"resume-section\">\n                        <h4>Education</h4>\n                        <p><strong> Institution: ").concat(institution, "</strong></p>\n                        <p>Degree: ").concat(degree, "</p>\n                        <p>Graduation Date: ").concat(graduationDate, "</p>\n                    </div>\n                    <div class=\"resume-section\">\n                        <h4>Skills</h4>\n                        <p>").concat(skills, "</p>\n                    </div>\n                    <div class=\"resume-section\">\n                        <h4>Work Experience</h4>\n                        <p><strong>").concat(company, "</strong> - ").concat(position, "</p>\n                        <p>Start Date: ").concat(startDate, "</p>\n                        <p>End Date: ").concat(endDate || 'Present', "</p>\n                        <p>Responsibilities: ").concat(responsibilities, "</p>\n                    </div>\n                    <div class=\"resume-section\">\n                        <h4>About</h4>\n                        <p>").concat(about, "</p>\n                    </div>\n                </div>\n            ");
-            if (resumeContent) {
-                resumeContent.innerHTML = resumeHTML;
-                if (resumeOutput) {
-                    resumeOutput.style.display = 'block';
+    // Resume generation function
+    const generateResumeHTML = () => __awaiter(void 0, void 0, void 0, function* () {
+        var _a;
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const addressInput = document.getElementById('address');
+        const photoInput = document.getElementById('photo');
+        const institutionInput = document.getElementById('institution');
+        const degreeInput = document.getElementById('degree');
+        const graduationDateInput = document.getElementById('graduation-date');
+        const skillsInput = document.getElementById('skills');
+        const companyInput = document.getElementById('company');
+        const positionInput = document.getElementById('position');
+        const startDateInput = document.getElementById('start-date');
+        const endDateInput = document.getElementById('end-date');
+        const responsibilitiesInput = document.getElementById('responsibilities');
+        const aboutInput = document.getElementById('about-me');
+        // Basic validation
+        if (!nameInput || !emailInput || !phoneInput || !addressInput ||
+            !institutionInput || !degreeInput || !graduationDateInput ||
+            !skillsInput || !companyInput || !positionInput ||
+            !startDateInput || !endDateInput || !responsibilitiesInput) {
+            alert('Please ensure all required fields are present.');
+            return '';
+        }
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const address = addressInput.value.trim();
+        const photo = photoInput && ((_a = photoInput.files) === null || _a === void 0 ? void 0 : _a[0]) ? URL.createObjectURL(photoInput.files[0]) : '';
+        const institution = institutionInput.value.trim();
+        const degree = degreeInput.value.trim();
+        const graduationDate = graduationDateInput.value.trim();
+        const skills = skillsInput.value.trim();
+        const company = companyInput.value.trim();
+        const position = positionInput.value.trim();
+        const startDate = startDateInput.value.trim();
+        const endDate = endDateInput.value.trim();
+        const responsibilities = responsibilitiesInput.value.trim();
+        const about = aboutInput ? aboutInput.value.trim() : '';
+        // Validate if all fields are filled
+        if (!name || !email || !phone || !address || !institution ||
+            !degree || !graduationDate || !skills || !company ||
+            !position || !startDate || !endDate || !responsibilities) {
+            alert('Please fill in all required fields.');
+            return '';
+        }
+        // Validate email
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert('Please enter a valid email address.');
+            return '';
+        }
+        // Validate dates (simple check)
+        if (new Date(startDate) > new Date(endDate)) {
+            alert('End date cannot be before the start date.');
+            return '';
+        }
+        return `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Resume</title>
+                <style>
+                    .resume-container {
+                        width: 90%;
+                        align-items: center;
+                        text-align: center;
+                        max-width: 800px;
+                        margin: 0 auto;
+                        background-color: #f1def1;
+                        border: #4a0746 2px solid;
+                        box-shadow: #d6d4d6 2px;
+                        padding: 20px;
+                        box-sizing: border-box;
+                    }
+                    .resume-header {
+                        text-align: center;
+                        margin-bottom: 30px;
+                    }
+                    .resume-header img {
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-bottom: 10px;
+                    }
+                    .resume-header h1 {
+                        font-size: 24px;
+                        margin: 0;
+                    }
+                    .resume-header p {
+                        margin: 5px 0;
+                    }
+                    .resume-section {
+                        margin-bottom: 20px;
+                        padding: 10px;
+                        border: #9a8d99 1px solid;
+                    }
+                    .resume-section h2 {
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="resume-container">
+                    <div class="resume-header">
+                        ${photo ? `<img src="${photo}" alt="Photo"/>` : ''}
+                        <h1>${name}</h1>
+                        <p>Email: ${email}</p>
+                        <p>Phone: ${phone}</p>
+                        <p>Address: ${address}</p>
+                    </div>
+                    <div class="resume-section">
+                        <h2>Education</h2>
+                        <p><strong>Institution: ${institution}</strong></p>
+                        <p>Degree: ${degree}</p>
+                        <p>Graduation Date: ${graduationDate}</p>
+                    </div>
+                    <div class="resume-section">
+                        <h2>Skills</h2>
+                        <p>${skills}</p>
+                    </div>
+                    <div class="resume-section">
+                        <h2>Work Experience</h2>
+                        <p><strong>${company}</strong> - ${position}</p>
+                        <p>Start Date: ${startDate}</p>
+                        <p>End Date: ${endDate || 'Present'}</p>
+                        <p>Responsibilities: ${responsibilities}</p>
+                    </div>
+                    <div class="resume-section">
+                        <h2>About</h2>
+                        <p>${about}</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+    });
+    const submitButton = document.getElementById('submit-all');
+    const resumeOutput = document.getElementById('resume-output');
+    const resumeContent = document.getElementById('resume-content');
+    const downloadResumeButton = document.getElementById('download-resume');
+    const editResumeButton = document.getElementById('edit-resume');
+    const shareResumeButton = document.getElementById('share-resume');
+    if (submitButton && resumeOutput && resumeContent && downloadResumeButton && editResumeButton && shareResumeButton) {
+        submitButton.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const resumeHTML = yield generateResumeHTML();
+                if (resumeContent) {
+                    resumeContent.innerHTML = resumeHTML;
+                    if (resumeOutput) {
+                        resumeOutput.style.display = 'block';
+                    }
                 }
-                // Clear all form fields
-                if (nameInput)
-                    nameInput.value = '';
-                if (emailInput)
-                    emailInput.value = '';
-                if (phoneInput)
-                    phoneInput.value = '';
-                if (addressInput)
-                    addressInput.value = '';
-                if (photoInput)
-                    photoInput.value = ''; // Reset file input
-                if (institutionInput)
-                    institutionInput.value = '';
-                if (degreeInput)
-                    degreeInput.value = '';
-                if (graduationDateInput)
-                    graduationDateInput.value = '';
-                if (skillsInput)
-                    skillsInput.value = '';
-                if (companyInput)
-                    companyInput.value = '';
-                if (positionInput)
-                    positionInput.value = '';
-                if (startDateInput)
-                    startDateInput.value = '';
-                if (endDateInput)
-                    endDateInput.value = '';
-                if (responsibilitiesInput)
-                    responsibilitiesInput.value = '';
-                if (aboutInput)
-                    aboutInput.value = '';
+            }
+            catch (error) {
+                console.error('Error generating resume:', error);
+            }
+        }));
+        downloadResumeButton.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const resumeHTML = yield generateResumeHTML();
+                const blob = new Blob([resumeHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'resume.html';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+            catch (error) {
+                console.error('Error downloading resume:', error);
+            }
+        }));
+        editResumeButton.addEventListener('click', () => {
+            if (resumeOutput) {
+                resumeOutput.style.display = 'none'; // Hide the generated resume
             }
         });
-        downloadResumeButton.addEventListener('click', function () {
-            var resumeHTML = (resumeContent === null || resumeContent === void 0 ? void 0 : resumeContent.innerHTML) || '';
-            var blob = new Blob([resumeHTML], { type: 'text/html' });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = 'resume.html';
-            a.click();
-            URL.revokeObjectURL(url);
-        });
+        shareResumeButton.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const resumeHTML = yield generateResumeHTML();
+                const blob = new Blob([resumeHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                if (navigator.share) {
+                    console.log('Web Share API is supported');
+                    yield navigator.share({
+                        title: 'My Resume',
+                        text: 'Check out my resume!',
+                        url: url
+                    });
+                }
+                else {
+                    console.log('Web Share API is not supported');
+                    window.open(url, '_blank');
+                }
+                URL.revokeObjectURL(url);
+            }
+            catch (error) {
+                console.error('Error sharing resume:', error);
+            }
+        }));
     }
 });
