@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// main.ts
+
+>>>>>>> 1d21e2997a15a467ee4af5fe00cbef815cad35c5
 document.addEventListener('DOMContentLoaded', () => {
     // Navigation toggle
     const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
