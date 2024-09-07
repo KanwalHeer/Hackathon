@@ -1,4 +1,4 @@
-// main.js
+// main.ts
 
 document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
