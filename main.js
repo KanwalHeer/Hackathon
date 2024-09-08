@@ -445,7 +445,7 @@ const generateResumeHTML = () => __awaiter(void 0, void 0, void 0, function* () 
         return '';
     }
     // Validate phone number (example: basic validation for 10-digit phone numbers)
-    const phonePattern = /^\d{10}$/; // Adjust regex pattern as needed
+    const phonePattern = /^\d{11}$/; // Adjust regex pattern as needed
     if (!phonePattern.test(phone)) {
         alert('Please enter a valid phone number (10 digits).');
         return '';

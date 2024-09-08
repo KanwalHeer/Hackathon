@@ -477,7 +477,7 @@ const generateResumeHTML = async (): Promise<string> => {
     }
 
     // Validate phone number (example: basic validation for 10-digit phone numbers)
-    const phonePattern = /^\d{10}$/;  // Adjust regex pattern as needed
+    const phonePattern = /^\d{11}$/;  // Adjust regex pattern as needed
     if (!phonePattern.test(phone)) {
         alert('Please enter a valid phone number (10 digits).');
         return '';
