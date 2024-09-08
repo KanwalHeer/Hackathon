@@ -230,3 +230,36 @@ button#share-resume {
 button#share-resume:hover {
     background-color: #3a0636; 
 }
+
+/* Social Media Share Buttons */
+.share-button {
+    background-color: #1d72b8; /* Default for sharing buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+.share-button.whatsapp {
+    background-color: #25D366;
+}
+
+.share-button.twitter {
+    background-color: #1DA1F2;
+}
+
+.share-button:hover {
+    background-color: #155a8a;
+}
+
+.share-button.whatsapp:hover {
+    background-color: #1EBE6F;
+}
+
+.share-button.twitter:hover {
+    background-color: #0d95e8;
+}
