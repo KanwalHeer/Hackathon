@@ -1,0 +1,169 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth; /* Smooth scrolling for links */
+}
+
+nav {
+    background-color: #5c0858;
+    color: white;
+    padding: 6px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Navigation button for small screens */
+.nav-toggle {
+    display: none;
+    background-color: #5c0858;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Navigation links */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px; 
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Toggle button for mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        background-color: #5c0858;
+        padding: 10px;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+}
+
+section {
+    padding: 20px;
+}
+
+h1.main-heading {
+    color: #4a0746;
+    border-bottom: 2px solid #4a0746;
+    padding-bottom: 10px;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button.submit-btn {
+    background-color: #5c0858;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+button.submit-btn:hover {
+    background-color: #4a0746;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Resume styling */
+.resume-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid #4a0746;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f1def1;
+}
+
+.resume-header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.resume-section {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #9a8d99;
+}
+
+.resume-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.resume-output {
+    margin-top: 20px;
+}
+
+.resume-output button {
+    display: block;
+    margin-top: 10px;
+}
