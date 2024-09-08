@@ -3,9 +3,16 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth; /* Smooth scrolling for links */
+    scroll-behavior: smooth; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; 
+    background-color: #f9f9f9; 
 }
 
+/* Navigation styles */
 nav {
     background-color: #5c0858;
     color: white;
@@ -77,8 +84,20 @@ nav {
     }
 }
 
-section {
+/* Center the content within the body */
+section,
+.resume-container,
+.form-section {
+    width: 100%;
+    max-width: 800px; 
+    margin: 20px auto; 
     padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Center the content within section and resume container */
+section {
+    text-align: center;
 }
 
 h1.main-heading {
@@ -94,7 +113,9 @@ h1.main-heading {
 label {
     display: block;
     margin-bottom: 5px;
+    margin-left: 10px;
     font-weight: bold;
+    text-align: left; 
 }
 
 input[type="text"],
@@ -102,11 +123,12 @@ input[type="email"],
 input[type="tel"],
 input[type="date"],
 textarea {
-    width: 100%;
+    width: calc(100% - 20px); 
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box; 
 }
 
 button.submit-btn {
@@ -130,14 +152,12 @@ button.submit-btn:hover {
 
 /* Resume styling */
 .resume-container {
-    width: 90%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
+    text-align: center; /* Center text and elements */
     border: 2px solid #4a0746;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f1def1;
+    background-color: #f5ebf5; 
+    padding: 20px; 
+    border-radius: 8px; 
 }
 
 .resume-header img {
@@ -163,7 +183,50 @@ button.submit-btn:hover {
     margin-top: 20px;
 }
 
-.resume-output button {
-    display: block;
-    margin-top: 10px;
+/* Skill button styling */
+.skill-btn {
+    background-color: #4a0746; /* Dark purple color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.skill-btn:hover {
+    background-color: #3a0636; 
+}
+
+/* Edit Resume Button */
+button#edit-resume {
+    background-color: #4a0746; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+button#edit-resume:hover {
+    background-color: #3a0636; 
+}
+
+/* Share Resume Button */
+button#share-resume {
+    background-color: #4a0746; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+button#share-resume:hover {
+    background-color: #3a0636; 
 }

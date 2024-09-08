@@ -1,3 +1,5 @@
+
+
 // Utility function to convert image file to Base64 string
 const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -8,23 +10,82 @@ const fileToBase64 = (file: File): Promise<string> => {
     });
 };
 
+// Function to clear all input fields
+const clearInputFields = () => {
+    const inputs = document.querySelectorAll('input, textarea') as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
+    inputs.forEach(input => {
+        if (input.type === 'file') {
+            (input as HTMLInputElement).value = ''; // Clear file input
+        } else {
+            input.value = ''; // Clear text input
+        }
+    });
+};
+
+// Function to populate input fields with existing data
+const populateInputFields = (data: any) => {
+    const nameInput = document.getElementById('name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('email') as HTMLInputElement | null;
+    const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
+    const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
+    const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
+    const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
+    const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
+    const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
+    const companyInput = document.getElementById('company') as HTMLInputElement | null;
+    const positionInput = document.getElementById('position') as HTMLInputElement | null;
+    const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
+    const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
+    const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
+    const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
+    const photoInput = document.getElementById('photo') as HTMLInputElement | null;
+
+    if (data) {
+        if (nameInput) nameInput.value = data.name || '';
+        if (emailInput) emailInput.value = data.email || '';
+        if (phoneInput) phoneInput.value = data.phone || '';
+        if (addressInput) addressInput.value = data.address || '';
+        if (institutionInput) institutionInput.value = data.institution || '';
+        if (degreeInput) degreeInput.value = data.degree || '';
+        if (graduationDateInput) graduationDateInput.value = data.graduationDate || '';
+        if (skillsInput) skillsInput.value = data.skills || '';
+        if (companyInput) companyInput.value = data.company || '';
+        if (positionInput) positionInput.value = data.position || '';
+        if (startDateInput) startDateInput.value = data.startDate || '';
+        if (endDateInput) endDateInput.value = data.endDate || '';
+        if (responsibilitiesInput) responsibilitiesInput.value = data.responsibilities || '';
+        if (aboutInput) aboutInput.value = data.about || '';
+
+        // Set the photo if available
+        if (data.photoBase64 && photoInput) {
+            const img = document.createElement('img');
+            img.src = data.photoBase64;
+            img.alt = 'Photo';
+            img.style.width = '150px';
+            img.style.height = '150px';
+            img.style.borderRadius = '50%';
+            img.style.objectFit = 'cover';
+            photoInput.parentElement?.insertAdjacentElement('beforeend', img);
+        }
+    }
+};
+
 // Function to generate resume HTML
 const generateResumeHTML = async (): Promise<string> => {
-    // Get all inputs
-    const nameInput = document.getElementById('name') as HTMLInputElement;
-    const emailInput = document.getElementById('email') as HTMLInputElement;
-    const phoneInput = document.getElementById('phone') as HTMLInputElement;
-    const addressInput = document.getElementById('address') as HTMLTextAreaElement;
-    const institutionInput = document.getElementById('institution') as HTMLInputElement;
-    const degreeInput = document.getElementById('degree') as HTMLInputElement;
-    const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement;
-    const skillsInput = document.getElementById('skills') as HTMLTextAreaElement;
-    const companyInput = document.getElementById('company') as HTMLInputElement;
-    const positionInput = document.getElementById('position') as HTMLInputElement;
-    const startDateInput = document.getElementById('start-date') as HTMLInputElement;
-    const endDateInput = document.getElementById('end-date') as HTMLInputElement;
-    const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement;
-    const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('email') as HTMLInputElement | null;
+    const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
+    const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
+    const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
+    const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
+    const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
+    const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
+    const companyInput = document.getElementById('company') as HTMLInputElement | null;
+    const positionInput = document.getElementById('position') as HTMLInputElement | null;
+    const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
+    const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
+    const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
+    const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
     const photoInput = document.getElementById('photo') as HTMLInputElement | null;
 
     // Basic validation
@@ -157,62 +218,112 @@ const generateResumeHTML = async (): Promise<string> => {
 
 // Event listeners and functions
 document.addEventListener('DOMContentLoaded', () => {
-    const generateButton = document.getElementById('generate-resume') as HTMLButtonElement;
-    const downloadButton = document.getElementById('download-resume') as HTMLButtonElement;
-    const editButton = document.getElementById('edit-resume') as HTMLButtonElement;
-    const shareButton = document.getElementById('share-resume') as HTMLButtonElement;
-    const resumeOutput = document.getElementById('resume-output') as HTMLElement;
-    const resumeContent = document.getElementById('resume-content') as HTMLElement;
+    const generateButton = document.getElementById('generate-resume') as HTMLButtonElement | null;
+    const downloadButton = document.getElementById('download-resume') as HTMLButtonElement | null;
+    const editButton = document.getElementById('edit-resume') as HTMLButtonElement | null;
+    const shareButton = document.getElementById('share-resume') as HTMLButtonElement | null;
+    const resumeOutput = document.getElementById('resume-output') as HTMLElement | null;
+    const resumeContent = document.getElementById('resume-content') as HTMLElement | null;
+    
+    if (generateButton && downloadButton && editButton && shareButton && resumeOutput && resumeContent) {
+        let resumeData: any = {};
 
-    generateButton.addEventListener('click', async () => {
-        const resumeHTML = await generateResumeHTML();
-        if (resumeHTML) {
-            resumeContent.innerHTML = resumeHTML;
-            resumeOutput.classList.remove('hidden');
-            downloadButton.classList.remove('hidden');
-            editButton.classList.remove('hidden');
-            shareButton.classList.remove('hidden');
+        generateButton.addEventListener('click', async () => {
+            const resumeHTML = await generateResumeHTML();
+            if (resumeHTML) {
+                resumeContent.innerHTML = resumeHTML;
+                resumeOutput.classList.remove('hidden');
+                downloadButton.classList.remove('hidden');
+                editButton.classList.remove('hidden');
+                shareButton.classList.remove('hidden');
+
+                // Save the resume data for later use
+                const nameInput = document.getElementById('name') as HTMLInputElement | null;
+                const emailInput = document.getElementById('email') as HTMLInputElement | null;
+                const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
+                const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
+                const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
+                const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
+                const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
+                const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
+                const companyInput = document.getElementById('company') as HTMLInputElement | null;
+                const positionInput = document.getElementById('position') as HTMLInputElement | null;
+                const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
+                const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
+                const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
+                const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
+                const photoInput = document.getElementById('photo') as HTMLInputElement | null;
+
+                resumeData = {
+                    name: nameInput?.value || '',
+                    email: emailInput?.value || '',
+                    phone: phoneInput?.value || '',
+                    address: addressInput?.value || '',
+                    institution: institutionInput?.value || '',
+                    degree: degreeInput?.value || '',
+                    graduationDate: graduationDateInput?.value || '',
+                    skills: skillsInput?.value || '',
+                    company: companyInput?.value || '',
+                    position: positionInput?.value || '',
+                    startDate: startDateInput?.value || '',
+                    endDate: endDateInput?.value || '',
+                    responsibilities: responsibilitiesInput?.value || '',
+                    about: aboutInput?.value || '',
+                    photoBase64: photoInput && photoInput.files?.[0] ? await fileToBase64(photoInput.files[0]) : ''
+                };
+
+                clearInputFields();
+            }
+        });
+
+        downloadButton.addEventListener('click', () => {
+            if (resumeContent) {
+                const resumeBlob = new Blob([resumeContent.innerHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(resumeBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'resume.html';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+        });
+
+        editButton.addEventListener('click', () => {
+            if (resumeOutput) {
+                resumeOutput.classList.add('hidden');
+                populateInputFields(resumeData);
+            }
+        });
+
+        shareButton.addEventListener('click', () => {
+            const resumeURL = 'https://example.com/resume.html'; // Replace with the actual URL
+            window.open(resumeURL, '_blank');
+        });
+
+        // Toggle skills visibility
+        const toggleSkillsButton = document.getElementById('toggle-skills') as HTMLButtonElement | null;
+        const skillsContent = document.getElementById('skills-content') as HTMLElement | null;
+
+        if (toggleSkillsButton && skillsContent) {
+            toggleSkillsButton.addEventListener('click', () => {
+                if (skillsContent.classList.contains('hidden')) {
+                    skillsContent.classList.remove('hidden');
+                    toggleSkillsButton.textContent = 'Hide Skills';
+                } else {
+                    skillsContent.classList.add('hidden');
+                    toggleSkillsButton.textContent = 'Show Skills';
+                }
+            });
         }
-    });
 
-    downloadButton.addEventListener('click', () => {
-        const resumeBlob = new Blob([resumeContent.innerHTML], { type: 'text/html' });
-        const url = URL.createObjectURL(resumeBlob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'resume.html';
-        a.click();
-        URL.revokeObjectURL(url);
-    });
+        // Navigation toggle script
+        const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+        const navLinks = document.getElementById('nav-links') as HTMLElement | null;
 
-    editButton.addEventListener('click', () => {
-        resumeOutput.classList.add('hidden');
-    });
-
-    shareButton.addEventListener('click', () => {
-        const resumeURL = 'https://example.com/resume.html'; // Replace with the actual URL
-        window.open(resumeURL, '_blank');
-    });
-
-    // Toggle skills visibility
-    const toggleSkillsButton = document.getElementById('toggle-skills') as HTMLButtonElement;
-    const skillsContent = document.getElementById('skills-content') as HTMLElement;
-
-    toggleSkillsButton.addEventListener('click', () => {
-        if (skillsContent.classList.contains('hidden')) {
-            skillsContent.classList.remove('hidden');
-            toggleSkillsButton.textContent = 'Hide Skills';
-        } else {
-            skillsContent.classList.add('hidden');
-            toggleSkillsButton.textContent = 'Show Skills';
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
         }
-    });
-
-    // Navigation toggle script
-    const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement;
-    const navLinks = document.getElementById('nav-links') as HTMLElement;
-
-    navToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+    }
 });
