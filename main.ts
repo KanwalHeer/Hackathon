@@ -1,12 +1,5 @@
 //=================================================================================================//
-//                   navbar , skills and links toggle functionality start
-
-
-
-// Get navbar section elements by their IDs
-const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
-const navLinks = document.getElementById('nav-links') as HTMLElement | null;
-
+//                   skills and links toggle functionality start
 
 // Get skills ssection elements by their IDs
 const toggleButton = document.getElementById('toggle-skills') as HTMLButtonElement;
@@ -43,16 +36,8 @@ if (toggleButtonlink && linksContent) {
 }
 
 
-// Navigation toggle script
-const navToggleFunction = ()=>{
-    if (navToggle && navLinks) { navLinks.classList.toggle('active');}
-}
 
-//attach with button and Ensure elements are not null before adding event listeners
-navToggle?.addEventListener('click',navToggleFunction)
-
-
-//                   navbar , skills and links toggle functionality completed
+//                    skills and links toggle functionality completed
 //=============================================================================================================//
 
 
@@ -133,7 +118,6 @@ const displayHeading = document.getElementById('displayHeading') as HTMLHeadingE
 const genrateResumeButton = document.getElementById('generateResume') as HTMLButtonElement
 const downloadResumeButton = document.getElementById('downloadResume') as HTMLButtonElement
 const copyResumeButton = document.getElementById('copyResume') as HTMLButtonElement
-const navbar = document.getElementById('navbar') as HTMLElement
 
 //                    -----------------------------
 
@@ -357,7 +341,7 @@ const resumeGeneratorHandler = () => {
         displayLinks.innerHTML = linkHTML;
 
         // Hide the form section
-        if (displayMainHeading) displayMainHeading.innerText = 'Milestone 03';
+        if (displayMainHeading) displayMainHeading.innerText = 'Milestone 03 to 05';
 
         // Hide the form section
         if (displayHeading) displayHeading.innerText = 'Dynamic Resume';
@@ -439,9 +423,6 @@ const downloadButtonHandle = () => {
         copyResumeButton.style.display = 'none';
         displayMainHeading.style.display = 'none';
         displayHeading.style.display = 'none';
-        navbar.style.display = 'none'
-       
-
     }
 
     // Trigger print
@@ -454,10 +435,6 @@ const downloadButtonHandle = () => {
         copyResumeButton.style.display = 'block';
         displayMainHeading.style.display = 'block';
         displayHeading.style.display = 'block';
-        navbar.style.display = 'block'
-        navbar.style.display = 'flex'
-        navbar.style.alignItems = 'center'
-      
     }
 };
 // Attach event listener to the download btn button
@@ -542,7 +519,6 @@ const displayResumeFromUrl = () => {
             // Hide elements that should not be visible
             if (displayMainHeading) displayMainHeading.style.display = 'none';
             if (displayHeading) displayHeading.style.display = 'none';
-            if (navbar) navbar.style.display = 'none';
             if (genrateResumeButton) genrateResumeButton.style.display = 'none';
             if (downloadResumeButton) downloadResumeButton.style.display = 'none';
             if (copyResumeButton) copyResumeButton.style.display = 'none';
@@ -563,7 +539,6 @@ const displayResumeFromUrl = () => {
         // Ensure that all elements are visible if no resume is displayed
         if (displayMainHeading) displayMainHeading.style.display = 'block';
         if (displayHeading) displayHeading.style.display = 'block';
-        if (navbar) navbar.style.display = 'block';
         if (genrateResumeButton) genrateResumeButton.style.display = 'block';
         if (downloadResumeButton) downloadResumeButton.style.display = 'block';
         if (copyResumeButton) copyResumeButton.style.display = 'block';

@@ -1,8 +1,5 @@
 //=================================================================================================//
-//                   navbar , skills and links toggle functionality start
-// Get navbar section elements by their IDs
-var navToggle = document.getElementById('nav-toggle');
-var navLinks = document.getElementById('nav-links');
+//                   skills and links toggle functionality start
 // Get skills ssection elements by their IDs
 var toggleButton = document.getElementById('toggle-skills');
 var skillsContent = document.getElementById('skills-content');
@@ -28,15 +25,7 @@ if (toggleButton && skillsContent) {
 if (toggleButtonlink && linksContent) {
     toggleButtonlink.addEventListener('click', function () { return toggleFunction(toggleButtonlink, linksContent, 'Links'); });
 }
-// Navigation toggle script
-var navToggleFunction = function () {
-    if (navToggle && navLinks) {
-        navLinks.classList.toggle('active');
-    }
-};
-//attach with button and Ensure elements are not null before adding event listeners
-navToggle === null || navToggle === void 0 ? void 0 : navToggle.addEventListener('click', navToggleFunction);
-//                   navbar , skills and links toggle functionality completed
+//                    skills and links toggle functionality completed
 //=============================================================================================================//
 //============================================================================================================//
 //                   resume generator functionality start
@@ -93,7 +82,6 @@ var displayHeading = document.getElementById('displayHeading');
 var genrateResumeButton = document.getElementById('generateResume');
 var downloadResumeButton = document.getElementById('downloadResume');
 var copyResumeButton = document.getElementById('copyResume');
-var navbar = document.getElementById('navbar');
 //                    -----------------------------
 //valid formate for input fields
 var namePattern = /^[A-Za-z]+([ '-][A-Za-z]+)*$/;
@@ -366,7 +354,6 @@ var downloadButtonHandle = function () {
         copyResumeButton.style.display = 'none';
         displayMainHeading.style.display = 'none';
         displayHeading.style.display = 'none';
-        navbar.style.display = 'none';
     }
     // Trigger print
     window.print();
@@ -377,9 +364,6 @@ var downloadButtonHandle = function () {
         copyResumeButton.style.display = 'block';
         displayMainHeading.style.display = 'block';
         displayHeading.style.display = 'block';
-        navbar.style.display = 'block';
-        navbar.style.display = 'flex';
-        navbar.style.alignItems = 'center';
     }
 };
 // Attach event listener to the download btn button
@@ -452,8 +436,6 @@ var displayResumeFromUrl = function () {
                 displayMainHeading.style.display = 'none';
             if (displayHeading)
                 displayHeading.style.display = 'none';
-            if (navbar)
-                navbar.style.display = 'none';
             if (genrateResumeButton)
                 genrateResumeButton.style.display = 'none';
             if (downloadResumeButton)
@@ -478,8 +460,6 @@ var displayResumeFromUrl = function () {
             displayMainHeading.style.display = 'block';
         if (displayHeading)
             displayHeading.style.display = 'block';
-        if (navbar)
-            navbar.style.display = 'block';
         if (genrateResumeButton)
             genrateResumeButton.style.display = 'block';
         if (downloadResumeButton)
