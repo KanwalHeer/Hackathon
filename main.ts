@@ -1,696 +1,606 @@
+//=================================================================================================//
+//                   navbar , skills and links toggle functionality start
 
 
-// // Utility function to convert image file to Base64 string
-// const fileToBase64 = (file: File): Promise<string> => {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader();
-//         reader.onloadend = () => resolve(reader.result as string);
-//         reader.onerror = reject;
-//         reader.readAsDataURL(file);
-//     });
-// };
 
-// // Function to clear all input fields
-// const clearInputFields = () => {
-//     const inputs = document.querySelectorAll('input, textarea') as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
-//     inputs.forEach(input => {
-//         if (input.type === 'file') {
-//             (input as HTMLInputElement).value = ''; // Clear file input
-//         } else {
-//             input.value = ''; // Clear text input
-//         }
-//     });
-// };
+// Get navbar section elements by their IDs
+const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+const navLinks = document.getElementById('nav-links') as HTMLElement | null;
 
-// // Function to populate input fields with existing data
-// const populateInputFields = (data: any) => {
-//     const nameInput = document.getElementById('name') as HTMLInputElement | null;
-//     const emailInput = document.getElementById('email') as HTMLInputElement | null;
-//     const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
-//     const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
-//     const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
-//     const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
-//     const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
-//     const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
-//     const companyInput = document.getElementById('company') as HTMLInputElement | null;
-//     const positionInput = document.getElementById('position') as HTMLInputElement | null;
-//     const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
-//     const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
-//     const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
-//     const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
-//     const photoInput = document.getElementById('photo') as HTMLInputElement | null;
 
-//     if (data) {
-//         if (nameInput) nameInput.value = data.name || '';
-//         if (emailInput) emailInput.value = data.email || '';
-//         if (phoneInput) phoneInput.value = data.phone || '';
-//         if (addressInput) addressInput.value = data.address || '';
-//         if (institutionInput) institutionInput.value = data.institution || '';
-//         if (degreeInput) degreeInput.value = data.degree || '';
-//         if (graduationDateInput) graduationDateInput.value = data.graduationDate || '';
-//         if (skillsInput) skillsInput.value = data.skills || '';
-//         if (companyInput) companyInput.value = data.company || '';
-//         if (positionInput) positionInput.value = data.position || '';
-//         if (startDateInput) startDateInput.value = data.startDate || '';
-//         if (endDateInput) endDateInput.value = data.endDate || '';
-//         if (responsibilitiesInput) responsibilitiesInput.value = data.responsibilities || '';
-//         if (aboutInput) aboutInput.value = data.about || '';
+// Get skills ssection elements by their IDs
+const toggleButton = document.getElementById('toggle-skills') as HTMLButtonElement;
+const skillsContent = document.getElementById('skills-content') as HTMLParagraphElement;
 
-//         // Set the photo if available
-//         if (data.photoBase64 && photoInput) {
-//             const img = document.createElement('img');
-//             img.src = data.photoBase64;
-//             img.alt = 'Photo';
-//             img.style.width = '150px';
-//             img.style.height = '150px';
-//             img.style.borderRadius = '50%';
-//             img.style.objectFit = 'cover';
-//             photoInput.parentElement?.insertAdjacentElement('beforeend', img);
-//         }
-//     }
-// };
 
-// // Function to generate resume HTML
-// const generateResumeHTML = async (): Promise<string> => {
-//     const nameInput = document.getElementById('name') as HTMLInputElement | null;
-//     const emailInput = document.getElementById('email') as HTMLInputElement | null;
-//     const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
-//     const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
-//     const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
-//     const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
-//     const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
-//     const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
-//     const companyInput = document.getElementById('company') as HTMLInputElement | null;
-//     const positionInput = document.getElementById('position') as HTMLInputElement | null;
-//     const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
-//     const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
-//     const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
-//     const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
-//     const photoInput = document.getElementById('photo') as HTMLInputElement | null;
+// Get link section elements by their IDs
+const toggleButtonlink = document.getElementById('toggle-links') as HTMLButtonElement; 
+const linksContent = document.getElementById('links-content') as HTMLParagraphElement; 
 
-//     // Basic validation
-//     if (!nameInput || !emailInput || !phoneInput || !addressInput ||
-//         !institutionInput || !degreeInput || !graduationDateInput ||
-//         !skillsInput || !companyInput || !positionInput ||
-//         !startDateInput || !endDateInput || !responsibilitiesInput) {
-//         alert('Please ensure all required fields are present.');
-//         return '';
-//     }
 
-//     const name = nameInput.value.trim();
-//     const email = emailInput.value.trim();
-//     const phone = phoneInput.value.trim();
-//     const address = addressInput.value.trim();
-//     const photoBase64 = photoInput && photoInput.files?.[0] ? await fileToBase64(photoInput.files[0]) : '';
+//skills and links toggale function
+const toggleFunction = (btn: HTMLButtonElement, content: HTMLParagraphElement, text: string) => {
+    // Toggle the 'hidden' class on the content
+    content.classList.toggle('hidden');
 
-//     const institution = institutionInput.value.trim();
-//     const degree = degreeInput.value.trim();
-//     const graduationDate = graduationDateInput.value.trim();
-//     const skills = skillsInput.value.trim();
-//     const company = companyInput.value.trim();
-//     const position = positionInput.value.trim();
-//     const startDate = startDateInput.value.trim();
-//     const endDate = endDateInput.value.trim();
-//     const responsibilities = responsibilitiesInput.value.trim();
-//     const about = aboutInput ? aboutInput.value.trim() : '';
+    // Update the button text based on visibility
+    if (content.classList.contains('hidden')) {
+        btn.textContent = `Show ${text}`;
+    } else {
+        btn.textContent = `Hide ${text}`;
+    }
+};
 
-//     // Validate if all fields are filled
-//     if (!name || !email || !phone || !address || !institution ||
-//         !degree || !graduationDate || !skills || !company ||
-//         !position || !startDate || !endDate || !responsibilities) {
-//         alert('Please fill in all required fields.');
-//         return '';
-//     }
 
-//     // Validate email
-//     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     if (!emailPattern.test(email)) {
-//         alert('Please enter a valid email address.');
-//         return '';
-//     }
+//attach with button and Ensure elements are not null before adding event listeners
+if (toggleButton && skillsContent) {
+    toggleButton.addEventListener('click', () => toggleFunction(toggleButton, skillsContent, 'Skills'));
+}
 
-//     // Validate phone number (example: basic validation for 10-digit phone numbers)
-//     const phonePattern = /^\d{10}$/;  // Adjust regex pattern as needed
-//     if (!phonePattern.test(phone)) {
-//         alert('Please enter a valid phone number (10 digits).');
-//         return '';
-//     }
 
-//     // Validate dates (simple check)
-//     if (new Date(startDate) > new Date(endDate)) {
-//         alert('End date cannot be before the start date.');
-//         return '';
-//     }
+if (toggleButtonlink && linksContent) {
+    toggleButtonlink.addEventListener('click', () => toggleFunction(toggleButtonlink, linksContent, 'Links'));
+}
 
-//     // Generate resume HTML
-//     return `
-//         <!DOCTYPE html>
-//         <html lang="en">
-//         <head>
-//             <meta charset="UTF-8">
-//             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//             <title>Resume</title>
-//             <style>
-//                 .resume-container {
-//                     width: 90%;
-//                     max-width: 800px;
-//                     text-align: center;
-//                     margin: 0 auto;
-//                     padding: 20px;
-//                     box-sizing: border-box;
-//                     border: 2px solid #4a0746;
-//                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-//                     background-color: #f1def1;
-//                 }
-//                 .resume-header img {
-//                     width: 150px;
-//                     height: 150px;
-//                     border-radius: 50%;
-//                     object-fit: cover;
-//                     margin-bottom: 10px;
-//                 }
-//                 .resume-section {
-//                     margin-bottom: 20px;
-//                     padding: 10px;
-//                     border: 1px solid #9a8d99;
-//                 }
-//                 .resume-section h2 {
-//                     font-size: 20px;
-//                     margin-bottom: 10px;
-//                 }
-//             </style>
-//         </head>
-//         <body>
-//             <div class="resume-container">
-//                 <div class="resume-header">
-//                     ${photoBase64 ? `<img src="${photoBase64}" alt="Photo"/>` : '<p>No photo available</p>'}
-//                     <h1>${name}</h1>
-//                     <p>Email: ${email}</p>
-//                     <p>Phone: ${phone}</p>
-//                     <p>Address: ${address}</p>
-//                 </div>
-//                 <div class="resume-section">
-//                     <h2>Education</h2>
-//                     <p><strong>Institution: ${institution}</strong></p>
-//                     <p>Degree: ${degree}</p>
-//                     <p>Graduation Date: ${graduationDate}</p>
-//                 </div>
-//                 <div class="resume-section">
-//                     <h2>Skills</h2>
-//                     <p>${skills}</p>
-//                 </div>
-//                 <div class="resume-section">
-//                     <h2>Work Experience</h2>
-//                     <p><strong>${company}</strong> - ${position}</p>
-//                     <p>Start Date: ${startDate}</p>
-//                     <p>End Date: ${endDate || 'Present'}</p>
-//                     <p>Responsibilities: ${responsibilities}</p>
-//                 </div>
-//                 <div class="resume-section">
-//                     <h2>About</h2>
-//                     <p>${about}</p>
-//                 </div>
-//             </div>
-//         </body>
-//         </html>
-//     `;
-// };
 
-// // Event listeners and functions
-// document.addEventListener('DOMContentLoaded', () => {
-//     const generateButton = document.getElementById('generate-resume') as HTMLButtonElement | null;
-//     const downloadButton = document.getElementById('download-resume') as HTMLButtonElement | null;
-//     const editButton = document.getElementById('edit-resume') as HTMLButtonElement | null;
-//     const shareButton = document.getElementById('share-resume') as HTMLButtonElement | null;
-//     const resumeOutput = document.getElementById('resume-output') as HTMLElement | null;
-//     const resumeContent = document.getElementById('resume-content') as HTMLElement | null;
+// Navigation toggle script
+const navToggleFunction = ()=>{
+    if (navToggle && navLinks) { navLinks.classList.toggle('active');}
+}
+
+//attach with button and Ensure elements are not null before adding event listeners
+navToggle?.addEventListener('click',navToggleFunction)
+
+
+//                   navbar , skills and links toggle functionality completed
+//=============================================================================================================//
+
+
+
+//============================================================================================================//
+//                   resume generator functionality start
+
+
+//Get input Element by ID
+//personal information section
+const photoInput = document.getElementById('photo') as HTMLInputElement 
+const nameInput = document.getElementById('name') as HTMLInputElement 
+const emailInput = document.getElementById('email') as HTMLInputElement 
+const phoneInput = document.getElementById('phone') as HTMLInputElement 
+const addressInput = document.getElementById('address') as HTMLTextAreaElement 
+
+//Education section
+const institutionInput = document.getElementById('institution') as HTMLInputElement 
+const degreeInput = document.getElementById('degree') as HTMLInputElement 
+const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement
+
+//Skills Section
+const skillsInput = document.getElementById('skills') as HTMLTextAreaElement 
+
+//Work experience section
+const companyInput = document.getElementById('company') as HTMLInputElement 
+const positionInput = document.getElementById('position') as HTMLInputElement 
+const startDateInput = document.getElementById('start-date') as HTMLInputElement 
+const endDateInput = document.getElementById('end-date') as HTMLInputElement 
+const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement
+
+//links section
+const linkedInInput = document.getElementById('linkedInInput') as HTMLInputElement
+const githubInput = document.getElementById('githubInput') as HTMLInputElement
+
+
+//                          ---------------------
+
+//Get display Element by ID
+const displayPhoto = document.getElementById('displayPhoto') as HTMLImageElement 
+const displayName = document.getElementById('displayName') as HTMLParagraphElement
+const displayEmail = document.getElementById('displayEmail') as HTMLParagraphElement
+const displayPhone = document.getElementById('displayPhone') as HTMLParagraphElement
+const displayAddress = document.getElementById('displayAddress') as HTMLParagraphElement
+
+//Education section
+const displayInstitution = document.getElementById('displayInstitution') as HTMLParagraphElement
+const displayDegree = document.getElementById('displayDegree') as HTMLParagraphElement
+const displayGraduation = document.getElementById('displayGraduation') as  HTMLParagraphElement;
+
+//Skills Section
+const displaySkillsDiv = document.getElementById('displaySkillsDiv') as HTMLDivElement 
+const displaySkills = document.getElementById('displaySkills') as HTMLParagraphElement
+
+
+//Work experience section
+const displayCompany = document.getElementById('displayCompany') as  HTMLParagraphElement
+const displayPosition = document.getElementById('displayPosition') as HTMLParagraphElement;
+const displayStartDate = document.getElementById('displayStartDate') as HTMLParagraphElement;
+const displayEndDate = document.getElementById('displayEndDate') as HTMLParagraphElement;
+const displayResponsibilities = document.getElementById('displayResponsibilities') as HTMLParagraphElement;
+
+//links section
+const displayLinkedIn = document.getElementById('displayLinkedIn') as HTMLAnchorElement
+const displayGithub = document.getElementById('displayGithub')    as HTMLAnchorElement 
+
+
+//get divs and headings
+const formDiv = document.getElementById('formDiv') as HTMLDivElement
+const resumeDiv = document.getElementById('resumeDiv') as HTMLDivElement
+const displayMainHeading = document.getElementById('displayMainHeading') as HTMLHeadingElement
+const displayHeading = document.getElementById('displayHeading') as HTMLHeadingElement
+
+
+// get buttons
+const genrateResumeButton = document.getElementById('generateResume') as HTMLButtonElement
+const downloadResumeButton = document.getElementById('downloadResume') as HTMLButtonElement
+const copyResumeButton = document.getElementById('copyResume') as HTMLButtonElement
+const navbar = document.getElementById('navbar') as HTMLElement
+
+//                    -----------------------------
+
+//valid formate for input fields
+const namePattern = /^[A-Za-z]+([ '-][A-Za-z]+)*$/;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phonePattern = /^[0-9\-\+\(\) ]+$/;
+const linkedinPattern = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
+const githubPattern = /^https:\/\/github\.com\/[a-zA-Z0-9-]+\/?$/;
     
-//     if (generateButton && downloadButton && editButton && shareButton && resumeOutput && resumeContent) {
-//         let resumeData: any = {};
-
-//         generateButton.addEventListener('click', async () => {
-//             const resumeHTML = await generateResumeHTML();
-//             if (resumeHTML) {
-//                 resumeContent.innerHTML = resumeHTML;
-//                 resumeOutput.classList.remove('hidden');
-//                 downloadButton.classList.remove('hidden');
-//                 editButton.classList.remove('hidden');
-//                 shareButton.classList.remove('hidden');
-
-//                 // Save the resume data for later use
-//                 const nameInput = document.getElementById('name') as HTMLInputElement | null;
-//                 const emailInput = document.getElementById('email') as HTMLInputElement | null;
-//                 const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
-//                 const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
-//                 const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
-//                 const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
-//                 const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
-//                 const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
-//                 const companyInput = document.getElementById('company') as HTMLInputElement | null;
-//                 const positionInput = document.getElementById('position') as HTMLInputElement | null;
-//                 const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
-//                 const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
-//                 const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
-//                 const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
-//                 const photoInput = document.getElementById('photo') as HTMLInputElement | null;
-
-//                 resumeData = {
-//                     name: nameInput?.value || '',
-//                     email: emailInput?.value || '',
-//                     phone: phoneInput?.value || '',
-//                     address: addressInput?.value || '',
-//                     institution: institutionInput?.value || '',
-//                     degree: degreeInput?.value || '',
-//                     graduationDate: graduationDateInput?.value || '',
-//                     skills: skillsInput?.value || '',
-//                     company: companyInput?.value || '',
-//                     position: positionInput?.value || '',
-//                     startDate: startDateInput?.value || '',
-//                     endDate: endDateInput?.value || '',
-//                     responsibilities: responsibilitiesInput?.value || '',
-//                     about: aboutInput?.value || '',
-//                     photoBase64: photoInput && photoInput.files?.[0] ? await fileToBase64(photoInput.files[0]) : ''
-//                 };
-
-//                 clearInputFields();
-//             }
-//         });
-
-//         downloadButton.addEventListener('click', () => {
-//             if (resumeContent) {
-//                 const resumeBlob = new Blob([resumeContent.innerHTML], { type: 'text/html' });
-//                 const url = URL.createObjectURL(resumeBlob);
-//                 const a = document.createElement('a');
-//                 a.href = url;
-//                 a.download = 'resume.html';
-//                 a.click();
-//                 URL.revokeObjectURL(url);
-//             }
-//         });
-
-//         editButton.addEventListener('click', () => {
-//             if (resumeOutput) {
-//                 resumeOutput.classList.add('hidden');
-//                 populateInputFields(resumeData);
-//             }
-//         });
-
-//         shareButton.addEventListener('click', () => {
-//             const resumeURL = 'https://example.com/resume.html'; // Replace with the actual URL
-//             window.open(resumeURL, '_blank');
-//         });
-
-//         // Toggle skills visibility
-//         const toggleSkillsButton = document.getElementById('toggle-skills') as HTMLButtonElement | null;
-//         const skillsContent = document.getElementById('skills-content') as HTMLElement | null;
-
-//         if (toggleSkillsButton && skillsContent) {
-//             toggleSkillsButton.addEventListener('click', () => {
-//                 if (skillsContent.classList.contains('hidden')) {
-//                     skillsContent.classList.remove('hidden');
-//                     toggleSkillsButton.textContent = 'Hide Skills';
-//                 } else {
-//                     skillsContent.classList.add('hidden');
-//                     toggleSkillsButton.textContent = 'Show Skills';
-//                 }
-//             });
-//         }
-
-//         // Navigation toggle script
-//         const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
-//         const navLinks = document.getElementById('nav-links') as HTMLElement | null;
-
-//         if (navToggle && navLinks) {
-//             navToggle.addEventListener('click', () => {
-//                 navLinks.classList.toggle('active');
-//             });
-//         }
-//     }
-// });
+//ccreate two variables
+let isValid = true
+let isEditing = false
 
 
+//resume genrator function
+const resumeGeneratorHandler = () => {
+    isValid = true;
+
+    // Name validation
+    if (nameInput.value.trim() === '') {
+        alert("Name is Required");
+        isValid = false;
+    } else if (!namePattern.test(nameInput.value.trim())) {
+        alert('Invalid name format. Only letters, spaces, apostrophes, and hyphens are allowed.');
+        isValid = false;
+    }
+
+    // Email validation
+    if (emailInput.value.trim() === '') {
+        alert("Email is Required");
+        isValid = false;
+    } else if (!emailPattern.test(emailInput.value.trim())) {
+        alert('Invalid email format.');
+        isValid = false;
+    }
+
+    // Phone number validation
+    if (phoneInput.value.trim() === '') {
+        alert("Phone number is Required");
+        isValid = false;
+    } else if (!phonePattern.test(phoneInput.value.trim())) {
+        alert('Invalid phone number format.');
+        isValid = false;
+    }
+
+    // Address validation
+    if (addressInput.value.trim() === '') {
+        alert("Address is Required");
+        isValid = false;
+    }
+
+    // Education section validation
+    if (institutionInput.value.trim() === '') {
+        alert("Institution is Required");
+        isValid = false;
+    }
+    if (degreeInput.value.trim() === '') {
+        alert("Degree is Required");
+        isValid = false;
+    }
+    if (graduationDateInput.value.trim() === '') {
+        alert("Graduation Date is Required");
+        isValid = false;
+    }
+
+    // Skills section validation
+    if (skillsInput.value.trim() === '') {
+        alert("Skills are Required");
+        isValid = false;
+    }
+
+    // Work experience validation
+    if (companyInput.value.trim() === '') {
+        alert("Company is Required");
+        isValid = false;
+    }
+    if (positionInput.value.trim() === '') {
+        alert("Position is Required");
+        isValid = false;
+    }
+    if (startDateInput.value.trim() === '') {
+        alert("Start Date is Required");
+        isValid = false;
+    }
+    if (endDateInput.value.trim() === '') {
+        alert("End Date is Required");
+        isValid = false;
+    } else if (endDateInput.value < startDateInput.value) {
+        alert('End date cannot be before start date.');
+        isValid = false;
+    }
+    if (responsibilitiesInput.value.trim() === '') {
+        alert("Responsibilities are Required");
+        isValid = false;
+    }
+
+    // Links section validation
+    if (linkedInInput.value.trim() === '' || !linkedinPattern.test(linkedInInput.value.trim())) {
+        alert("LinkedIn URL is required or is in an invalid format.");
+        isValid = false;
+    }
+    if (githubInput.value.trim() === '' || !githubPattern.test(githubInput.value.trim())) {
+        alert("GitHub URL is required or is in an invalid format.");
+        isValid = false;
+    }
 
 
+    //comet here
+    if (isValid) {
+        if (isEditing) {
+            // Enable
+         //personal info section
+         nameInput.removeAttribute('readonly')
+         emailInput.removeAttribute('readonly')
+         phoneInput.removeAttribute('readonly')
+         photoInput.removeAttribute('readonly')
+         addressInput.removeAttribute('readonly')
+         
+        //education section
+         institutionInput.removeAttribute('readonly')
+         degreeInput.removeAttribute('readonly')
+         githubInput.removeAttribute('readonly')
+         
+        //experience section
+         companyInput.removeAttribute('readonly')
+         positionInput.removeAttribute('readonly')
+         startDateInput.removeAttribute('readonly')
+         endDateInput.removeAttribute('readonly')
+         responsibilitiesInput.removeAttribute('readonly')
+
+         //skills section
+         skillsInput.removeAttribute('readonly')
+
+         //links ssection
+         githubInput.removeAttribute('readonly')
+         linkedInInput.removeAttribute('readonly')
+
+         //hide and show functionality of dives
+         if (formDiv) formDiv.style.display = 'block';
+         if (resumeDiv) resumeDiv.style.display = 'none';
+
+         //update buttons
+         genrateResumeButton.textContent = 'Update Resume'
+         downloadResumeButton.style.display = 'none'
+         copyResumeButton.style.display = 'none'
+      }else{
+         
+        //get values from inputs given by user  
+        //personal information section
+        const nameValue = nameInput.value;
+        const emailValue = emailInput.value;
+        const phonValue = phoneInput.value;
+        const addressValue = addressInput.value;
+        const photoInputFile = photoInput.files?.[0];
+        const photoValue = photoInputFile ? URL.createObjectURL(photoInputFile) : '';
+
+        //education section
+        const institutionValue = institutionInput.value;
+        const degreeValue = degreeInput.value;
+        const graduationDateValue = graduationDateInput.value;
+
+        //skills section
+        const skillsValue = skillsInput.value;
+
+        //experince section
+        const companyValue = companyInput.value;
+        const positionValue = positionInput.value;
+        const startDateValue = startDateInput.value;
+        const endDateValue = endDateInput.value;
+        const responsibilitiesValue = responsibilitiesInput.value;
+
+        //link section
+        const linkedInValue = linkedInInput.value;
+        const githubValue = githubInput.value;
 
 
+        //       -----------
 
 
+        // Set values to display elements
+        if (displayPhoto) displayPhoto.src = photoValue;
+        if (displayName) displayName.textContent = nameValue;
+        if (displayEmail) displayEmail.textContent = emailValue;
+        if (displayPhone) displayPhone.textContent = phonValue;
+        if (displayAddress) displayAddress.textContent = addressValue;
+
+        // Education section
+        if (displayInstitution) displayInstitution.textContent = institutionValue;
+        if (displayDegree) displayDegree.textContent = degreeValue;
+        if (displayGraduation) displayGraduation.textContent = graduationDateValue;
+
+        // Skills Section
+        if (displaySkills) displaySkills.textContent = skillsValue;
+        if (displaySkillsDiv) displaySkillsDiv.style.display = 'block';
+
+        // Work experience section
+        if (displayCompany) displayCompany.textContent = companyValue;
+        if (displayPosition) displayPosition.textContent = positionValue;
+        if (displayStartDate) displayStartDate.textContent = startDateValue;
+        if (displayEndDate) displayEndDate.textContent = endDateValue;
+        if (displayResponsibilities) displayResponsibilities.textContent = responsibilitiesValue;
+
+        // Links section
+        if (displayLinkedIn) displayLinkedIn.href = linkedInValue;
+        if (displayGithub) displayGithub.href = githubValue;
+
+        // Hide the form section
+        if (displayMainHeading) displayMainHeading.innerText = 'Milestone 03';
+
+        // Hide the form section
+        if (displayHeading) displayHeading.innerText = 'Dynamic Resume';
+
+        // Hide the form section
+        if (formDiv) formDiv.style.display = 'none';
 
 
+        //
+        nameInput.setAttribute('readonly','reue')
+        emailInput.setAttribute('readonly','true')
+        phoneInput.setAttribute('readonly','true')
+        photoInput.setAttribute('readonly','reue')
+        addressInput.setAttribute('readonly','reue')
+        
+       
+        institutionInput.setAttribute('readonly','reue')
+        degreeInput.setAttribute('readonly','reue')
+        githubInput.setAttribute('readonly','reue')
+
+        
+        companyInput.setAttribute('readonly','reue')
+        positionInput.setAttribute('readonly','reue')
+        startDateInput.setAttribute('readonly','reue')
+        endDateInput.setAttribute('readonly','reue')
+        responsibilitiesInput.setAttribute('readonly','reue')
+
+       
+        skillsInput.setAttribute('readonly','reue')
+
+        
+        githubInput.setAttribute('readonly','reue')
+        linkedInInput.setAttribute('readonly','reue')
+
+        
+        genrateResumeButton.textContent = 'Edit Resume'
+        downloadResumeButton.style.display = 'block'
+        copyResumeButton.style.display = 'block'
 
 
+        // Store data in localStorage
+        const uniqueKey = nameValue.trim().replace(/\s+/g, '-').toLowerCase();
+        localStorage.setItem(uniqueKey, JSON.stringify({
+         name: nameValue,
+         photo: photoValue,
+         email: emailValue,
+         linkedIn: linkedInValue,
+         github: githubValue,
+         address: addressValue,
+         phone: phonValue,
+         institution: institutionValue,
+         degree: degreeValue,
+         graduationDate: graduationDateValue,
+         skills: skillsValue,
+         company: companyValue,
+         position: positionValue,
+         startDate: startDateValue,
+         endDate: endDateValue,
+         responsibilities: responsibilitiesValue
+     }));
+
+        // Create the unique URL and display
+        const uniqueUrl = `${window.location.origin}?resume=${uniqueKey}`;
+        copyResumeButton.textContent = `Copy URL ${uniqueUrl}`;
+        copyResumeButton.classList.remove('hidden');
+        downloadResumeButton.classList.remove('hidden');
+    }
+
+      isEditing = !isEditing
+    }
+}
+
+genrateResumeButton?.addEventListener('click', resumeGeneratorHandler);
+
+//                         resume generate functionality completed
+//==========================================================================================================//
 
 
+// Function to handle resume download
+const downloadButtonHandle = () => {
+    
+    // Hide other buttons and elements that should not be printed
+    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading && linksContent && skillsContent && toggleButton && toggleButtonlink ) {
+        genrateResumeButton.style.display = 'none';
+        downloadResumeButton.style.display = 'none';
+        copyResumeButton.style.display = 'none';
+        displayMainHeading.style.display = 'none';
+        displayHeading.style.display = 'none';
+        navbar.style.display = 'none'
+        linksContent.classList.remove('hidden');
+        skillsContent.classList.remove('hidden');
+       toggleButton.style.display = 'none'
+        toggleButtonlink.style.display = 'none'
+
+    }
+
+    // Trigger print
+    window.print();
+
+     // show other buttons and elements that should not be printed
+    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading && skillsContent && linksContent && toggleButton && toggleButtonlink) {
+        genrateResumeButton.style.display = 'block';
+        downloadResumeButton.style.display = 'block';
+        copyResumeButton.style.display = 'block';
+        displayMainHeading.style.display = 'block';
+        displayHeading.style.display = 'block';
+        navbar.style.display = 'block'
+        navbar.style.display = 'flex'
+        navbar.style.alignItems = 'center'
+        linksContent.classList.add('hidden');
+        skillsContent.classList.add('hidden') 
+        toggleButton.style.display = 'block'
+        toggleButtonlink.style.display = 'block'
+        
+    }
+};
+// Attach event listener to the download btn button
+downloadResumeButton.addEventListener('click', downloadButtonHandle);
 
 
+//                      download function completed
+//========================================================================================================//
 
 
-
-
-// Utility function to convert image file to Base64 string
-const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
+// Function to copy the resume link
+const copyLinkHandle = () => {
+    const link = copyResumeButton.textContent?.split(' ')[2]; // Extract URL from button text
+    if (link) {
+        navigator.clipboard.writeText(link).then(() => {
+            alert(`Link copied to clipboard! Your Link`);
+        }).catch(err => {
+            console.error('Failed to copy link: ', err);
+        });
+    }
 };
 
-// Function to clear all input fields
-const clearInputFields = () => {
-    const inputs = document.querySelectorAll('input, textarea') as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
-    inputs.forEach(input => {
-        if (input.type === 'file') {
-            (input as HTMLInputElement).value = ''; // Clear file input
+// Attach event listener to the copy resume button
+copyResumeButton.addEventListener('click',copyLinkHandle)
+
+// display resume url
+const displayResumeFromUrl = () => {
+    const params = new URLSearchParams(window.location.search);
+    const resumeKey = params.get('resume');
+
+    if (resumeKey) {
+        const data = localStorage.getItem(resumeKey);
+        if (data) {
+            const {
+                name,
+                photo,
+                email,
+                linkedIn,
+                github,
+                address,
+                phone,
+                institution,
+                degree,
+                graduationDate,
+                company,
+                position,
+                startDate,
+                endDate,
+                responsibilities,
+                skills
+            } = JSON.parse(data);
+
+            // Set values to display elements
+            if (displayPhoto) displayPhoto.src = photo;
+            if (displayName) displayName.textContent = name;
+            if (displayEmail) displayEmail.textContent = email;
+            if (displayPhone) displayPhone.textContent = phone;
+            if (displayAddress) displayAddress.textContent = address;
+            if (displayInstitution) displayInstitution.textContent = institution;
+            if (displayDegree) displayDegree.textContent = degree;
+            if (displayGraduation) displayGraduation.textContent = graduationDate;
+            if (displayCompany) displayCompany.textContent = company;
+            if (displayPosition) displayPosition.textContent = position;
+            if (displayStartDate) displayStartDate.textContent = startDate;
+            if (displayEndDate) displayEndDate.textContent = endDate;
+            if (displayResponsibilities) displayResponsibilities.textContent = responsibilities;
+            if (displaySkills) displaySkills.textContent = skills;
+            if (displayLinkedIn) displayLinkedIn.href = linkedIn;
+            if (displayGithub) displayGithub.href = github;
+
+            // Hide the form and show the resume
+            if (formDiv) formDiv.style.display = 'none';
+            if (resumeDiv) resumeDiv.style.display = 'block';
+
+            // Hide elements that should not be visible
+            if (displayMainHeading) displayMainHeading.style.display = 'none';
+            if (displayHeading) displayHeading.style.display = 'none';
+            if (navbar) navbar.style.display = 'none';
+            if (genrateResumeButton) genrateResumeButton.style.display = 'none';
+            if (downloadResumeButton) downloadResumeButton.style.display = 'none';
+            if (copyResumeButton) copyResumeButton.style.display = 'none';
+            
         } else {
-            input.value = ''; // Clear text input
+            // Handle case where data is not found
+            formDiv.style.display = 'none';
+            resumeDiv.style.display = 'none';
         }
-    });
-};
+    } else {
+        // Handle case where there is no resume key
+        formDiv.style.display = 'block';
+        resumeDiv.style.display = 'none';
 
-// Function to populate input fields with existing data
-const populateInputFields = (data: any) => {
-    const nameInput = document.getElementById('name') as HTMLInputElement | null;
-    const emailInput = document.getElementById('email') as HTMLInputElement | null;
-    const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
-    const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
-    const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
-    const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
-    const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
-    const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
-    const companyInput = document.getElementById('company') as HTMLInputElement | null;
-    const positionInput = document.getElementById('position') as HTMLInputElement | null;
-    const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
-    const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
-    const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
-    const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
-    const photoInput = document.getElementById('photo') as HTMLInputElement | null;
-
-    if (data) {
-        if (nameInput) nameInput.value = data.name || '';
-        if (emailInput) emailInput.value = data.email || '';
-        if (phoneInput) phoneInput.value = data.phone || '';
-        if (addressInput) addressInput.value = data.address || '';
-        if (institutionInput) institutionInput.value = data.institution || '';
-        if (degreeInput) degreeInput.value = data.degree || '';
-        if (graduationDateInput) graduationDateInput.value = data.graduationDate || '';
-        if (skillsInput) skillsInput.value = data.skills || '';
-        if (companyInput) companyInput.value = data.company || '';
-        if (positionInput) positionInput.value = data.position || '';
-        if (startDateInput) startDateInput.value = data.startDate || '';
-        if (endDateInput) endDateInput.value = data.endDate || '';
-        if (responsibilitiesInput) responsibilitiesInput.value = data.responsibilities || '';
-        if (aboutInput) aboutInput.value = data.about || '';
-
-        // Set the photo if available
-        if (data.photoBase64 && photoInput) {
-            const img = document.createElement('img');
-            img.src = data.photoBase64;
-            img.alt = 'Photo';
-            img.style.width = '150px';
-            img.style.height = '150px';
-            img.style.borderRadius = '50%';
-            img.style.objectFit = 'cover';
-            photoInput.parentElement?.insertAdjacentElement('beforeend', img);
-        }
+        // Ensure that all elements are visible if no resume is displayed
+        if (displayMainHeading) displayMainHeading.style.display = 'block';
+        if (displayHeading) displayHeading.style.display = 'block';
+        if (navbar) navbar.style.display = 'block';
+        if (genrateResumeButton) genrateResumeButton.style.display = 'block';
+        if (downloadResumeButton) downloadResumeButton.style.display = 'block';
+        if (copyResumeButton) copyResumeButton.style.display = 'block';
+        
     }
 };
 
-// Function to generate resume HTML
-const generateResumeHTML = async (): Promise<string> => {
-    const nameInput = document.getElementById('name') as HTMLInputElement | null;
-    const emailInput = document.getElementById('email') as HTMLInputElement | null;
-    const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
-    const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
-    const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
-    const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
-    const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
-    const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
-    const companyInput = document.getElementById('company') as HTMLInputElement | null;
-    const positionInput = document.getElementById('position') as HTMLInputElement | null;
-    const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
-    const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
-    const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
-    const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
-    const photoInput = document.getElementById('photo') as HTMLInputElement | null;
+// Initialize the page based on URL parameters
+displayResumeFromUrl();
 
-    // Basic validation
-    if (!nameInput || !emailInput || !phoneInput || !addressInput ||
-        !institutionInput || !degreeInput || !graduationDateInput ||
-        !skillsInput || !companyInput || !positionInput ||
-        !startDateInput || !endDateInput || !responsibilitiesInput) {
-        alert('Please ensure all required fields are present.');
-        return '';
-    }
 
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const phone = phoneInput.value.trim();
-    const address = addressInput.value.trim();
-    const photoBase64 = photoInput && photoInput.files?.[0] ? await fileToBase64(photoInput.files[0]) : '';
 
-    const institution = institutionInput.value.trim();
-    const degree = degreeInput.value.trim();
-    const graduationDate = graduationDateInput.value.trim();
-    const skills = skillsInput.value.trim();
-    const company = companyInput.value.trim();
-    const position = positionInput.value.trim();
-    const startDate = startDateInput.value.trim();
-    const endDate = endDateInput.value.trim();
-    const responsibilities = responsibilitiesInput.value.trim();
-    const about = aboutInput ? aboutInput.value.trim() : '';
 
-    // Validate if all fields are filled
-    if (!name || !email || !phone || !address || !institution ||
-        !degree || !graduationDate || !skills || !company ||
-        !position || !startDate || !endDate || !responsibilities) {
-        alert('Please fill in all required fields.');
-        return '';
-    }
 
-    // Validate email
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert('Please enter a valid email address.');
-        return '';
-    }
+//                   resume generator functionality completed
+//=============================================================================================================//
 
-    // Validate phone number (example: basic validation for 10-digit phone numbers)
-    const phonePattern = /^\d{11}$/;  // Adjust regex pattern as needed
-    if (!phonePattern.test(phone)) {
-        alert('Please enter a valid phone number (10 digits).');
-        return '';
-    }
 
-    // Validate dates (simple check)
-    if (new Date(startDate) > new Date(endDate)) {
-        alert('End date cannot be before the start date.');
-        return '';
-    }
 
-    // Generate resume HTML
-    return `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Resume</title>
-            <style>
-                .resume-container {
-                    width: 90%;
-                    max-width: 800px;
-                    text-align: center;
-                    margin: 0 auto;
-                    padding: 20px;
-                    box-sizing: border-box;
-                    border: 2px solid #4a0746;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    background-color: #f1def1;
-                }
-                .resume-header img {
-                    width: 150px;
-                    height: 150px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-bottom: 10px;
-                }
-                .resume-section {
-                    margin-bottom: 20px;
-                    padding: 10px;
-                    border: 1px solid #9a8d99;
-                }
-                .resume-section h2 {
-                    font-size: 20px;
-                    margin-bottom: 10px;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="resume-container">
-                <div class="resume-header">
-                    ${photoBase64 ? `<img src="${photoBase64}" alt="Photo"/>` : '<p>No photo available</p>'}
-                    <h1>${name}</h1>
-                    <p>Email: ${email}</p>
-                    <p>Phone: ${phone}</p>
-                    <p>Address: ${address}</p>
-                </div>
-                <div class="resume-section">
-                    <h2>Education</h2>
-                    <p><strong>Institution: ${institution}</strong></p>
-                    <p>Degree: ${degree}</p>
-                    <p>Graduation Date: ${graduationDate}</p>
-                </div>
-                <div class="resume-section">
-                    <h2>Skills</h2>
-                    <p>${skills}</p>
-                </div>
-                <div class="resume-section">
-                    <h2>Work Experience</h2>
-                    <p><strong>${company}</strong> - ${position}</p>
-                    <p>Start Date: ${startDate}</p>
-                    <p>End Date: ${endDate || 'Present'}</p>
-                    <p>Responsibilities: ${responsibilities}</p>
-                </div>
-                <div class="resume-section">
-                    <h2>About</h2>
-                    <p>${about}</p>
-                </div>
-            </div>
-        </body>
-        </html>
-    `;
-};
 
-// Event listeners and functions
-document.addEventListener('DOMContentLoaded', () => {
-    const generateButton = document.getElementById('generate-resume') as HTMLButtonElement | null;
-    const downloadButton = document.getElementById('download-resume') as HTMLButtonElement | null;
-    const editButton = document.getElementById('edit-resume') as HTMLButtonElement | null;
-    const shareButton = document.getElementById('share-resume') as HTMLButtonElement | null;
-    const resumeOutput = document.getElementById('resume-output') as HTMLElement | null;
-    const resumeContent = document.getElementById('resume-content') as HTMLElement | null;
-    const socialShare = document.getElementById('social-share') as HTMLElement | null;
 
-    if (generateButton && downloadButton && editButton && shareButton && resumeOutput && resumeContent && socialShare) {
-        let resumeData: any = {};
 
-        generateButton.addEventListener('click', async () => {
-            const resumeHTML = await generateResumeHTML();
-            if (resumeHTML) {
-                resumeContent.innerHTML = resumeHTML;
-                resumeOutput.classList.remove('hidden');
-                downloadButton.classList.remove('hidden');
-                editButton.classList.remove('hidden');
-                shareButton.classList.remove('hidden');
 
-                // Save the resume data for later use
-                const nameInput = document.getElementById('name') as HTMLInputElement | null;
-                const emailInput = document.getElementById('email') as HTMLInputElement | null;
-                const phoneInput = document.getElementById('phone') as HTMLInputElement | null;
-                const addressInput = document.getElementById('address') as HTMLTextAreaElement | null;
-                const institutionInput = document.getElementById('institution') as HTMLInputElement | null;
-                const degreeInput = document.getElementById('degree') as HTMLInputElement | null;
-                const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement | null;
-                const skillsInput = document.getElementById('skills') as HTMLTextAreaElement | null;
-                const companyInput = document.getElementById('company') as HTMLInputElement | null;
-                const positionInput = document.getElementById('position') as HTMLInputElement | null;
-                const startDateInput = document.getElementById('start-date') as HTMLInputElement | null;
-                const endDateInput = document.getElementById('end-date') as HTMLInputElement | null;
-                const responsibilitiesInput = document.getElementById('responsibilities') as HTMLTextAreaElement | null;
-                const aboutInput = document.getElementById('about-me') as HTMLTextAreaElement | null;
-                const photoInput = document.getElementById('photo') as HTMLInputElement | null;
 
-                resumeData = {
-                    name: nameInput?.value || '',
-                    email: emailInput?.value || '',
-                    phone: phoneInput?.value || '',
-                    address: addressInput?.value || '',
-                    institution: institutionInput?.value || '',
-                    degree: degreeInput?.value || '',
-                    graduationDate: graduationDateInput?.value || '',
-                    skills: skillsInput?.value || '',
-                    company: companyInput?.value || '',
-                    position: positionInput?.value || '',
-                    startDate: startDateInput?.value || '',
-                    endDate: endDateInput?.value || '',
-                    responsibilities: responsibilitiesInput?.value || '',
-                    about: aboutInput?.value || '',
-                    photoBase64: photoInput && photoInput.files?.[0] ? await fileToBase64(photoInput.files[0]) : ''
-                };
 
-                clearInputFields();
-            }
-        });
 
-        downloadButton.addEventListener('click', () => {
-            if (resumeContent) {
-                const resumeBlob = new Blob([resumeContent.innerHTML], { type: 'text/html' });
-                const url = URL.createObjectURL(resumeBlob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'resume.html';
-                a.click();
-                URL.revokeObjectURL(url);
-            }
-        });
 
-        editButton.addEventListener('click', () => {
-            if (resumeOutput) {
-                resumeOutput.classList.add('hidden');
-                populateInputFields(resumeData);
-            }
-        });
 
-        shareButton.addEventListener('click', () => {
-            if (socialShare) {
-                socialShare.classList.toggle('hidden');
-            }
-        });
 
-        // Social media sharing buttons
-        const shareWhatsAppButton = document.getElementById('share-whatsapp') as HTMLButtonElement | null;
-        const shareTwitterButton = document.getElementById('share-twitter') as HTMLButtonElement | null;
 
-        if (shareWhatsAppButton) {
-            shareWhatsAppButton.addEventListener('click', () => {
-                const url = `https://api.whatsapp.com/send?text=${encodeURIComponent('Check out my resume! ' + window.location.href)}`;
-                window.open(url, '_blank');
-            });
-        }
 
-        if (shareTwitterButton) {
-            shareTwitterButton.addEventListener('click', () => {
-                const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent('Check out my resume! ' + window.location.href)}`;
-                window.open(url, '_blank');
-            });
-        }
 
-        // Toggle skills visibility
-        const toggleSkillsButton = document.getElementById('toggle-skills') as HTMLButtonElement | null;
-        const skillsContent = document.getElementById('skills-content') as HTMLElement | null;
 
-        if (toggleSkillsButton && skillsContent) {
-            toggleSkillsButton.addEventListener('click', () => {
-                if (skillsContent.classList.contains('hidden')) {
-                    skillsContent.classList.remove('hidden');
-                    toggleSkillsButton.textContent = 'Hide Skills';
-                } else {
-                    skillsContent.classList.add('hidden');
-                    toggleSkillsButton.textContent = 'Show Skills';
-                }
-            });
-        }
 
-        // Navigation toggle script
-        const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
-        const navLinks = document.getElementById('nav-links') as HTMLElement | null;
 
-        if (navToggle && navLinks) {
-            navToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-        }
-    }
-});
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+    
+
+        
+    
