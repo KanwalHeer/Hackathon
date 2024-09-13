@@ -74,7 +74,6 @@ var displayInstitution = document.getElementById('displayInstitution');
 var displayDegree = document.getElementById('displayDegree');
 var displayGraduation = document.getElementById('displayGraduation');
 //Skills Section
-var displaySkillsDiv = document.getElementById('displaySkillsDiv');
 var displaySkills = document.getElementById('displaySkills');
 //Work experience section
 var displayCompany = document.getElementById('displayCompany');
@@ -83,10 +82,10 @@ var displayStartDate = document.getElementById('displayStartDate');
 var displayEndDate = document.getElementById('displayEndDate');
 var displayResponsibilities = document.getElementById('displayResponsibilities');
 //links section
-var displayLinkedIn = document.getElementById('displayLinkedIn');
-var displayGithub = document.getElementById('displayGithub');
+var displayLinks = document.getElementById('displayLinks');
 //get divs and headings
 var formDiv = document.getElementById('formDiv');
+var outputDiv = document.getElementById('outputDiv');
 var resumeDiv = document.getElementById('resumeDiv');
 var displayMainHeading = document.getElementById('displayMainHeading');
 var displayHeading = document.getElementById('displayHeading');
@@ -193,7 +192,6 @@ var resumeGeneratorHandler = function () {
         alert("GitHub URL is required or is in an invalid format.");
         isValid = false;
     }
-    //comet here
     if (isValid) {
         if (isEditing) {
             // Enable
@@ -223,6 +221,8 @@ var resumeGeneratorHandler = function () {
                 formDiv.style.display = 'block';
             if (resumeDiv)
                 resumeDiv.style.display = 'none';
+            if (outputDiv)
+                outputDiv.style.display = 'none';
             //update buttons
             genrateResumeButton.textContent = 'Update Resume';
             downloadResumeButton.style.display = 'none';
@@ -254,8 +254,13 @@ var resumeGeneratorHandler = function () {
             var githubValue = githubInput.value;
             //       -----------
             // Set values to display elements
-            if (displayPhoto)
-                displayPhoto.src = photoValue;
+            //creat image element for display image div
+            displayPhoto.innerHTML = '';
+            var image = document.createElement("img");
+            image.src = photoValue;
+            image.alt = "Profile Picture";
+            image.style.maxWidth = "100%";
+            displayPhoto.appendChild(image);
             if (displayName)
                 displayName.textContent = nameValue;
             if (displayEmail)
@@ -274,8 +279,6 @@ var resumeGeneratorHandler = function () {
             // Skills Section
             if (displaySkills)
                 displaySkills.textContent = skillsValue;
-            if (displaySkillsDiv)
-                displaySkillsDiv.style.display = 'block';
             // Work experience section
             if (displayCompany)
                 displayCompany.textContent = companyValue;
@@ -288,10 +291,8 @@ var resumeGeneratorHandler = function () {
             if (displayResponsibilities)
                 displayResponsibilities.textContent = responsibilitiesValue;
             // Links section
-            if (displayLinkedIn)
-                displayLinkedIn.href = linkedInValue;
-            if (displayGithub)
-                displayGithub.href = githubValue;
+            var linkHTML = "\n        <div class=\"links-container\">\n                <a href=\"".concat(linkedInValue, "\" target=\"_blank\">LinkedIn Profile</a>\n                <a href=\"").concat(githubValue, "\" target=\"_blank\">GitHub Profile</a>\n        </div>");
+            displayLinks.innerHTML = linkHTML;
             // Hide the form section
             if (displayMainHeading)
                 displayMainHeading.innerText = 'Milestone 03';
@@ -301,7 +302,10 @@ var resumeGeneratorHandler = function () {
             // Hide the form section
             if (formDiv)
                 formDiv.style.display = 'none';
-            //
+            if (resumeDiv)
+                resumeDiv.style.display = 'none';
+            if (outputDiv)
+                outputDiv.style.display = 'block';
             nameInput.setAttribute('readonly', 'reue');
             emailInput.setAttribute('readonly', 'true');
             phoneInput.setAttribute('readonly', 'true');
@@ -316,8 +320,8 @@ var resumeGeneratorHandler = function () {
             endDateInput.setAttribute('readonly', 'reue');
             responsibilitiesInput.setAttribute('readonly', 'reue');
             skillsInput.setAttribute('readonly', 'reue');
-            githubInput.setAttribute('readonly', 'reue');
-            linkedInInput.setAttribute('readonly', 'reue');
+            displayLinks.setAttribute('readonly', 'reue');
+            //buttons update
             genrateResumeButton.textContent = 'Edit Resume';
             downloadResumeButton.style.display = 'block';
             copyResumeButton.style.display = 'block';
@@ -356,26 +360,18 @@ genrateResumeButton === null || genrateResumeButton === void 0 ? void 0 : genrat
 // Function to handle resume download
 var downloadButtonHandle = function () {
     // Hide other buttons and elements that should not be printed
-    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading && linksContent && skillsContent && toggleButton && toggleButtonlink) {
+    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading) {
         genrateResumeButton.style.display = 'none';
         downloadResumeButton.style.display = 'none';
         copyResumeButton.style.display = 'none';
         displayMainHeading.style.display = 'none';
         displayHeading.style.display = 'none';
         navbar.style.display = 'none';
-        linksContent.classList.remove('hidden');
-        skillsContent.classList.remove('hidden');
-        toggleButton.style.display = 'none';
-        toggleButtonlink.style.display = 'none';
-        if (formDiv)
-            formDiv.style.display = 'none';
-        if (resumeDiv)
-            resumeDiv.style.display = 'block';
     }
     // Trigger print
     window.print();
     // show other buttons and elements that should not be printed
-    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading && skillsContent && linksContent && toggleButton && toggleButtonlink) {
+    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading) {
         genrateResumeButton.style.display = 'block';
         downloadResumeButton.style.display = 'block';
         copyResumeButton.style.display = 'block';
@@ -384,14 +380,6 @@ var downloadButtonHandle = function () {
         navbar.style.display = 'block';
         navbar.style.display = 'flex';
         navbar.style.alignItems = 'center';
-        linksContent.classList.add('hidden');
-        skillsContent.classList.add('hidden');
-        toggleButton.style.display = 'block';
-        toggleButtonlink.style.display = 'block';
-        if (formDiv)
-            formDiv.style.display = 'block';
-        if (resumeDiv)
-            resumeDiv.style.display = 'none';
     }
 };
 // Attach event listener to the download btn button
@@ -421,6 +409,7 @@ var displayResumeFromUrl = function () {
         if (data) {
             var _a = JSON.parse(data), name_1 = _a.name, photo = _a.photo, email = _a.email, linkedIn = _a.linkedIn, github = _a.github, address = _a.address, phone = _a.phone, institution = _a.institution, degree = _a.degree, graduationDate = _a.graduationDate, company = _a.company, position = _a.position, startDate = _a.startDate, endDate = _a.endDate, responsibilities = _a.responsibilities, skills = _a.skills;
             // Set values to display elements
+            displayPhoto.innerHTML = "<img src=\"".concat(photo, "\" alt=\"Profile Picture\" style=\"max-width: 100%;\">");
             if (displayPhoto)
                 displayPhoto.src = photo;
             if (displayName)
@@ -449,15 +438,15 @@ var displayResumeFromUrl = function () {
                 displayResponsibilities.textContent = responsibilities;
             if (displaySkills)
                 displaySkills.textContent = skills;
-            if (displayLinkedIn)
-                displayLinkedIn.href = linkedIn;
-            if (displayGithub)
-                displayGithub.href = github;
+            var linkHTML = "\n                <div class=\"links-container\">\n                        <a href=\"".concat(linkedIn, "\" target=\"_blank\">LinkedIn Profile</a>\n                        <a href=\"").concat(github, "\" target=\"_blank\">GitHub Profile</a>\n                </div>");
+            displayLinks.innerHTML = linkHTML;
             // Hide the form and show the resume
             if (formDiv)
                 formDiv.style.display = 'none';
             if (resumeDiv)
-                resumeDiv.style.display = 'block';
+                resumeDiv.style.display = 'none';
+            if (outputDiv)
+                outputDiv.style.display = 'block';
             // Hide elements that should not be visible
             if (displayMainHeading)
                 displayMainHeading.style.display = 'none';
@@ -476,12 +465,14 @@ var displayResumeFromUrl = function () {
             // Handle case where data is not found
             formDiv.style.display = 'none';
             resumeDiv.style.display = 'none';
+            outputDiv.style.display = 'none';
         }
     }
     else {
         // Handle case where there is no resume key
         formDiv.style.display = 'block';
-        resumeDiv.style.display = 'none';
+        resumeDiv.style.display = 'block';
+        outputDiv.style.display = 'none';
         // Ensure that all elements are visible if no resume is displayed
         if (displayMainHeading)
             displayMainHeading.style.display = 'block';

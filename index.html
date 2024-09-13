@@ -1,231 +1,332 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<!-- header -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- header -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resume Builder</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styles/print.css" media="print">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/print.css" media="print" />
+  </head>
 
-</head>
+  <!-- body -->
+  <body>
 
-<!-- body -->
-<body>
-  
-  <!-- navbar -->
-  <nav id="navbar">
-    <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
-    <ul id="nav-links" class="nav-links">
+    <!-- navbar -->
+    <nav id="navbar">
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+        ☰
+      </button>
+      <ul id="nav-links" class="nav-links">
         <li><a href="#m1">Milestone01&02</a></li>
         <li><a href="#m3">Milestone03</a></li>
         <li><a href="#m4">Milestone04</a></li>
         <li><a href="#m5">Milestone05</a></li>
-    </ul>
-</nav>
+      </ul>
+    </nav>
 
 
- <!-- Milestone 01 & 02 Static Resume -->
-  
-    <section id="m1">
-     <h1 class="main-heading" id="displayMainHeading">Milestone 01 & 02</h1>
-     <h1 id="displayHeading">Static Resume</h1>
-     <div class="resume-container">
-        <!-- personal information -->
-        <div class="resume-header">
-          <img id="displayPhoto" src="KanwalHeer.jpg" alt="Profile Photo">
-          <h1 id="displayName">Kanwal Heer</h1>
-          <p id="displayEmail"><strong>Email: kanwalheer@example.com</strong></p>
-          <p id="displayPhone">Phone: 123-456-7890</p>
-          <p id="displayAddress">Address: Gulshan e Maymar Karachi</p>
-        </div>
+    <!-- Milestone 01 & 02 Static Resume -->
+    <div id="resumeDiv">
+      <section id="m1">
+        <h1 class="main-heading">Milestone 01 & 02</h1>
+        <h1>Static Resume</h1>
+        <div class="resume-container">
 
+          <!-- personal information -->
+          <div class="resume-header">
+            <img src="KanwalHeer.jpg" alt="Profile Photo" />
+            <h1>Kanwal Heer</h1>
+            <p><strong>Email: kanwalheer@example.com</strong></p>
+            <p>Phone: 123-456-7890</p>
+            <p>Address: Gulshan e Maymar Karachi</p>
+          </div>
 
-        <!-- Education Section -->
-        <div class="resume-section">
-          <h1>Education</h1>
-          <p id="displayInstitution"><strong>University Name : JMB College</strong></p>
-          <p id="displayDegree">Degree: Bachelor's in Computer Science</p>
-          <p id="displayDraduation">Graduation Date: May 2022</p>
-        </div>
+          <!-- Education Section -->
+          <div class="resume-section">
+            <h1>Education</h1>
+            <p><strong>University Name : JMB College</strong></p>
+            <p>Degree: Bachelor's in Computer Science</p>
+            <p>Graduation Date: May 2022</p>
+          </div>
 
-        
-         <!-- skills section -->
-        <div class="resume-section">
-          <h1>Skills</h1>  
-          <button id="toggle-skills" class="skill-btn">Show Skills</button> 
-          <div id="skills-content"  class="hidden">
-            <p id="displaySkills">JavaScript | TypeScript | HTML | CSS | TailwindCSS | Next.js | MongoDB | PostgreSQL | Node.js</p>
+          <!-- skills section -->
+          <div class="resume-section">
+            <h1>Skills</h1>
+            <button id="toggle-skills" class="skill-btn">Show Skills</button>
+            <div id="skills-content" class="hidden">
+              <p >
+                JavaScript | TypeScript | HTML | CSS | TailwindCSS | Next.js |
+                MongoDB | PostgreSQL | Node.js
+              </p>
+            </div>
+          </div>
+
+          <!-- Experience section -->
+          <div class="resume-section">
+            <h1>Work Experience</h1>
+            <p><strong>Company Name: Paandaa</strong></p>
+            <p>Job Title: Full Stack Developer</p>
+            <p>Start Date: January 2023</p>
+            <p>End Date: Present</p>
+            <p>Responsibilities:</p>
+            <p>
+              As a Full Stack Developer, I lead a team of developers, overseeing
+              the development of complex projects from concept to deployment. My
+              role involves close collaboration with clients to understand their
+              requirements and deliver tailored solutions. I actively engage in
+              client communication to ensure their needs are met and provide
+              technical guidance to address any issues. Additionally, I work
+              closely with my team, fostering an environment of continuous
+              learning and professional growth. I also stay updated with the
+              latest technologies and best practices to ensure our projects
+              incorporate the most efficient and innovative solutions.
+            </p>
+          </div>
+
+          <!-- Social Medai Acount section -->
+          <div class="resume-section">
+            <h1>Socila Acounts</h1>
+            <button id="toggle-links" class="link-btn">Show Acounts</button>
+            <div id="links-content" class="hidden">
+              <a
+                href="https://www.linkedin.com/in/kanwal-heer/"
+                target="_blank"
+                rel="noopener"
+                >LinkedIn Profile</a
+              >
+              <br />
+              <a
+                href="https://github.com/kanwal-heer/"
+                target="_blank"
+                rel="noopener"
+                >GitHub Profile</a
+              >
+            </div>
           </div>
         </div>
- 
+      </section>
+    </div>
 
-        <!-- Experience section -->
-        <div class="resume-section">
-          <h1>Work Experience</h1>
-          <p id="displayCompany"><strong>Company Name: Paandaa</strong></p>
-          <p id="displayPosition">Job Title: Full Stack Developer</p>
-          <p id="displayStartDate">Start Date: January 2023</p>
-          <p id="displayEndDate">End Date: Present</p>
-          <p >Responsibilities:</p>
-          <p id="displayResponsibilities"> As a Full Stack Developer, I lead a team of developers, overseeing the development of complex
-          projects from concept to deployment. My role involves close collaboration with clients to understand 
-          their requirements and deliver tailored solutions. I actively engage in client communication to ensure 
-          their needs are met and provide technical guidance to address any issues. Additionally, I work closely
-          with my team, fostering an environment of continuous learning and professional growth. I also stay 
-          updated with the latest technologies and best practices to ensure our projects incorporate the most 
-          efficient and innovative solutions. </p>    
-        </div>
-        
 
-        <!-- Social Medai Acount section -->
-        <div class="resume-section">
-            <h1>Socila Acounts</h1>  
-           <button id="toggle-links" class="link-btn">Show Acounts</button> 
-            <div id="links-content" id="displayLinksDiv" class="hidden">
-              <a id="displayLinkedin" href="https://www.linkedin.com/in/kanwal-heer/" target="_blank" rel="noopener">LinkedIn Profile</a>
-              <br>
-              <a id="DisplayGithub" href="https://github.com/kanwal-heer/" target="_blank" rel="noopener">GitHub Profile</a> 
-            </div>
-        </div>
-      </div>
-    </section>
-  
-    
-
+    <!-- form div -->
     <div id="formDiv" class="form-section">
-    <!-- Milestone 03 -->
-    <section id="m3">
-      <h1 class="main-heading">Milestone 03 to 05</h1>
-      <h1 class="main-heading">Dynamic Resume</h1>
+      <!-- Milestone 03 -->
+      <section id="m3">
+        <h1 class="main-heading">Milestone 03 to 05</h1>
+        <h1 class="main-heading">Dynamic Resume</h1>
+
+        <!-- Personal Information -->
+        <section>
+          <h2>Personal Information</h2>
+          <form id="personal-info-form" class="form-section">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              required
+            />
+
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+            />
+
+            <label for="phone">Phone:</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Phone Number"
+              required
+            />
+
+            <label for="address">Address:</label>
+            <textarea
+              id="address"
+              name="address"
+              placeholder="Country"
+              rows="3"
+              required
+            ></textarea>
+
+            <label for="photo">Upload Photo:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" />
+          </form>
+        </section>
+
+        <!-- Education -->
+        <section>
+          <h2>Education</h2>
+          <form id="education-form" class="form-section">
+            <label for="institution">Institution:</label>
+            <input
+              type="text"
+              id="institution"
+              name="institution"
+              placeholder="University Name"
+              required
+            />
+
+            <label for="degree">Degree:</label>
+            <input
+              type="text"
+              id="degree"
+              name="degree"
+              placeholder="Bachelor's in Computer Science"
+              required
+            />
+
+            <label for="graduation-date">Graduation Date:</label>
+            <input
+              type="date"
+              id="graduation-date"
+              name="graduation-date"
+              required
+            />
+          </form>
+        </section>
+
+        <!-- Skills -->
+        <section>
+          <h2>Skills</h2>
+          <form id="skills-form" class="form-section">
+            <label for="skills">Skills:</label>
+            <textarea
+              id="skills"
+              name="skills"
+              placeholder="Describe your skills"
+              rows="5"
+              required
+            ></textarea>
+          </form>
+        </section>
+
+        <!-- Work Experience -->
+        <section>
+          <h2>Work Experience</h2>
+          <form id="work-experience-form" class="form-section">
+            <label for="company">Company:</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              placeholder="Company Name"
+              required
+            />
+
+            <label for="position">Position:</label>
+            <input
+              type="text"
+              id="position"
+              name="position"
+              placeholder="Job Title"
+              required
+            />
+
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="start-date" required />
+
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="end-date" />
+
+            <label for="responsibilities">Responsibilities:</label>
+            <textarea
+              id="responsibilities"
+              name="responsibilities"
+              placeholder="Describe your responsibilities"
+              rows="5"
+              required
+            ></textarea>
+          </form>
+        </section>
+
+        <!-- socail medai account section -->
+        <section>
+          <h2>Social Acounts</h2>
+          <label for="links">Social media Links</label>
+          <form class="farm-section" id="links"></form>
+          <input
+            type="url"
+            placeholder="Enter your LinkedIn profile"
+            id="linkedInInput"
+            required
+          />
+          <br />
+          <input
+            type="url"
+            placeholder="Enter your Github profile"
+            id="githubInput"
+            required
+          />
+        </section>
+      </section>
+    </div>
+
     
-      <!-- Personal Information -->
-     <section>
-        <h2>Personal Information</h2>
-        <form id="personal-info-form" class="form-section">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" placeholder="Name" required>
-                    
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Email" required>
-                    
-          <label for="phone">Phone:</label>
-          <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
-                    
-          <label for="address">Address:</label>
-          <textarea id="address" name="address" placeholder="Country" rows="3" required></textarea>
-                    
-          <label for="photo">Upload Photo:</label>
-          <input type="file" id="photo" name="photo" accept="image/*">
-        </form>
-     </section>
-    
-    <!-- Education -->
-    <section>
-    <h2>Education</h2>
-      <form id="education-form" class="form-section">
-        <label for="institution">Institution:</label>
-        <input type="text" id="institution" name="institution" placeholder="University Name" required>
-                    
-        <label for="degree">Degree:</label>
-        <input type="text" id="degree" name="degree" placeholder="Bachelor's in Computer Science" required>
-                    
-        <label for="graduation-date">Graduation Date:</label>
-        <input type="date" id="graduation-date" name="graduation-date" required>
-      </form>
-    </section>
-    
-    <!-- Skills -->
-    <section>
-    <h2>Skills</h2>
-      <form id="skills-form" class="form-section">
-        <label for="skills">Skills:</label>
-        <textarea id="skills" name="skills" placeholder="skills" rows="5" required></textarea>
-      </form>
-    </section>
-    
-    <!-- Work Experience -->
-    <section>
-    <h2>Work Experience</h2>
-      <form id="work-experience-form" class="form-section">
-        <label for="company">Company:</label>
-        <input type="text" id="company" name="company" placeholder="Company Name" required>
-                    
-        <label for="position">Position:</label>
-        <input type="text" id="position" name="position" placeholder="Job Title" required>
-                    
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" name="start-date" required>
-                    
-        <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" name="end-date">
-                    
-        <label for="responsibilities">Responsibilities:</label>
-        <textarea id="responsibilities" name="responsibilities" placeholder="Describe your responsibilities" rows="5" required></textarea>
-      </form>
-    </section>
-    
+    <!-- Resume Output -->
+    <div id="outputDiv" class="resume-container">
+      <section id="m1">
+        <h1 class="main-heading" id="displayMainHeading"></h1>
+        <h1 id="displayHeading"></h1>
+        <div class="resume-container">
+          <!-- personal information -->
+          <div class="resume-header">
+            <div id="displayPhoto"></div>
+            <h1 id="displayName"></h1>
+            <p id="displayEmail"><strong></strong></p>
+            <p id="displayPhone"></p>
+            <p id="displayAddress"></p>
+          </div>
 
-    <!-- socail medai account section -->
-    <section>
-    <h2>Social Acounts</h2>
-        <label for="links">Social media Links</label>
-        <form class="farm-section" id="links"></form>
-        <input type="url" placeholder="Enter your LinkedIn profile" id="linkedInInput" required>
-        <br>
-        <input type="url" placeholder="Enter your Github profile" id="githubInput" required>
-    </section>
+          <!-- Education Section -->
+          <div class="resume-section">
+            <h1>Education</h1>
+            <p id="displayInstitution"><strong></strong></p>
+            <p id="displayDegree"></p>
+            <p id="displayDraduation"></p>
+          </div>
 
-    
-</div>
-<button type="button" id="generateResume" class="submit-btn">Generate Resume</button>
-<button type="button" id="downloadResume" class="dbtn">Download Resume</button>
-<button type="button" id="copyResume" class="cbtn">Copy Link</button>
+          <!-- skills section -->
+          <div class="resume-section">
+            <h1>Skills</h1>
+            <p id="displaySkills"></p>
+          </div>
 
-           
-<script src="main.js"></script>
-</body>
- </html>
-    
+          <!-- Experience section -->
+          <div class="resume-section">
+            <h1>Work Experience</h1>
+            <p id="displayCompany"><strong></strong></p>
+            <p id="displayPosition"></p>
+            <p id="displayStartDate"></p>
+            <p id="displayEndDate"></p>
+            <p>Responsibilities:</p>
+            <p id="displayResponsibilities"></p>
+          </div>
 
+          <!-- Social Medai Acount section -->
+          <div class="resume-section accounts">
+            <div id="displayLinks" class="links-container"></div>
+          </div>
+        </div>
+      </section>
+      <div class="btnsDiv">
+      <button type="button" id="downloadResume" class="dbtn">
+        Download Resume
+      </button>
+      <button type="button" id="copyResume" class="cbtn">Copy Link</button>
+    </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
+    <button type="button" id="generateResume" class="submit-btn">
+      Generate Resume
+    </button>
+  </body>
+  <script src="main.js"></script>
+</html>

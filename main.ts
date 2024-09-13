@@ -75,7 +75,7 @@ const degreeInput = document.getElementById('degree') as HTMLInputElement
 const graduationDateInput = document.getElementById('graduation-date') as HTMLInputElement
 
 //Skills Section
-const skillsInput = document.getElementById('skills') as HTMLTextAreaElement 
+const skillsInput = document.getElementById('skills') as HTMLInputElement 
 
 //Work experience section
 const companyInput = document.getElementById('company') as HTMLInputElement 
@@ -98,13 +98,14 @@ const displayEmail = document.getElementById('displayEmail') as HTMLParagraphEle
 const displayPhone = document.getElementById('displayPhone') as HTMLParagraphElement
 const displayAddress = document.getElementById('displayAddress') as HTMLParagraphElement
 
+
 //Education section
 const displayInstitution = document.getElementById('displayInstitution') as HTMLParagraphElement
 const displayDegree = document.getElementById('displayDegree') as HTMLParagraphElement
 const displayGraduation = document.getElementById('displayGraduation') as  HTMLParagraphElement;
 
+
 //Skills Section
-const displaySkillsDiv = document.getElementById('displaySkillsDiv') as HTMLDivElement 
 const displaySkills = document.getElementById('displaySkills') as HTMLParagraphElement
 
 
@@ -115,13 +116,14 @@ const displayStartDate = document.getElementById('displayStartDate') as HTMLPara
 const displayEndDate = document.getElementById('displayEndDate') as HTMLParagraphElement;
 const displayResponsibilities = document.getElementById('displayResponsibilities') as HTMLParagraphElement;
 
+
 //links section
-const displayLinkedIn = document.getElementById('displayLinkedIn') as HTMLAnchorElement
-const displayGithub = document.getElementById('displayGithub')    as HTMLAnchorElement 
+const displayLinks = document.getElementById('displayLinks') as HTMLDivElement
 
 
 //get divs and headings
 const formDiv = document.getElementById('formDiv') as HTMLDivElement
+const outputDiv = document.getElementById('outputDiv') as HTMLDivElement
 const resumeDiv = document.getElementById('resumeDiv') as HTMLDivElement
 const displayMainHeading = document.getElementById('displayMainHeading') as HTMLHeadingElement
 const displayHeading = document.getElementById('displayHeading') as HTMLHeadingElement
@@ -135,6 +137,7 @@ const navbar = document.getElementById('navbar') as HTMLElement
 
 //                    -----------------------------
 
+
 //valid formate for input fields
 const namePattern = /^[A-Za-z]+([ '-][A-Za-z]+)*$/;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -142,6 +145,7 @@ const phonePattern = /^[0-9\-\+\(\) ]+$/;
 const linkedinPattern = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
 const githubPattern = /^https:\/\/github\.com\/[a-zA-Z0-9-]+\/?$/;
     
+
 //ccreate two variables
 let isValid = true
 let isEditing = false
@@ -150,6 +154,7 @@ let isEditing = false
 //resume genrator function
 const resumeGeneratorHandler = () => {
     isValid = true;
+
 
     // Name validation
     if (nameInput.value.trim() === '') {
@@ -160,6 +165,7 @@ const resumeGeneratorHandler = () => {
         isValid = false;
     }
 
+
     // Email validation
     if (emailInput.value.trim() === '') {
         alert("Email is Required");
@@ -168,6 +174,7 @@ const resumeGeneratorHandler = () => {
         alert('Invalid email format.');
         isValid = false;
     }
+
 
     // Phone number validation
     if (phoneInput.value.trim() === '') {
@@ -178,11 +185,13 @@ const resumeGeneratorHandler = () => {
         isValid = false;
     }
 
+
     // Address validation
     if (addressInput.value.trim() === '') {
         alert("Address is Required");
         isValid = false;
     }
+
 
     // Education section validation
     if (institutionInput.value.trim() === '') {
@@ -197,6 +206,7 @@ const resumeGeneratorHandler = () => {
         alert("Graduation Date is Required");
         isValid = false;
     }
+
 
     // Skills section validation
     if (skillsInput.value.trim() === '') {
@@ -240,7 +250,6 @@ const resumeGeneratorHandler = () => {
     }
 
 
-    //comet here
     if (isValid) {
         if (isEditing) {
             // Enable
@@ -273,6 +282,7 @@ const resumeGeneratorHandler = () => {
          //hide and show functionality of dives
          if (formDiv) formDiv.style.display = 'block';
          if (resumeDiv) resumeDiv.style.display = 'none';
+         if (outputDiv) outputDiv.style.display = 'none';
 
          //update buttons
          genrateResumeButton.textContent = 'Update Resume'
@@ -307,13 +317,17 @@ const resumeGeneratorHandler = () => {
         //link section
         const linkedInValue = linkedInInput.value;
         const githubValue = githubInput.value;
-
-
         //       -----------
 
 
         // Set values to display elements
-        if (displayPhoto) displayPhoto.src = photoValue;
+         //creat image element for display image div
+         displayPhoto.innerHTML = '';
+         const image = document.createElement("img");
+         image.src = photoValue;
+         image.alt = "Profile Picture";
+         image.style.maxWidth = "100%";
+         displayPhoto.appendChild(image);
         if (displayName) displayName.textContent = nameValue;
         if (displayEmail) displayEmail.textContent = emailValue;
         if (displayPhone) displayPhone.textContent = phonValue;
@@ -326,8 +340,7 @@ const resumeGeneratorHandler = () => {
 
         // Skills Section
         if (displaySkills) displaySkills.textContent = skillsValue;
-        if (displaySkillsDiv) displaySkillsDiv.style.display = 'block';
-
+       
         // Work experience section
         if (displayCompany) displayCompany.textContent = companyValue;
         if (displayPosition) displayPosition.textContent = positionValue;
@@ -336,8 +349,12 @@ const resumeGeneratorHandler = () => {
         if (displayResponsibilities) displayResponsibilities.textContent = responsibilitiesValue;
 
         // Links section
-        if (displayLinkedIn) displayLinkedIn.href = linkedInValue;
-        if (displayGithub) displayGithub.href = githubValue;
+        const linkHTML = `
+        <div class="links-container">
+                <a href="${linkedInValue}" target="_blank">LinkedIn Profile</a>
+                <a href="${githubValue}" target="_blank">GitHub Profile</a>
+        </div>`;
+        displayLinks.innerHTML = linkHTML;
 
         // Hide the form section
         if (displayMainHeading) displayMainHeading.innerText = 'Milestone 03';
@@ -347,35 +364,28 @@ const resumeGeneratorHandler = () => {
 
         // Hide the form section
         if (formDiv) formDiv.style.display = 'none';
+        if (resumeDiv) resumeDiv.style.display = 'none';
+        if (outputDiv) outputDiv.style.display = 'block';
 
 
-        //
+
         nameInput.setAttribute('readonly','reue')
         emailInput.setAttribute('readonly','true')
         phoneInput.setAttribute('readonly','true')
         photoInput.setAttribute('readonly','reue')
         addressInput.setAttribute('readonly','reue')
-        
-       
         institutionInput.setAttribute('readonly','reue')
         degreeInput.setAttribute('readonly','reue')
         githubInput.setAttribute('readonly','reue')
-
-        
         companyInput.setAttribute('readonly','reue')
         positionInput.setAttribute('readonly','reue')
         startDateInput.setAttribute('readonly','reue')
         endDateInput.setAttribute('readonly','reue')
         responsibilitiesInput.setAttribute('readonly','reue')
-
-       
         skillsInput.setAttribute('readonly','reue')
-
-        
-        githubInput.setAttribute('readonly','reue')
-        linkedInInput.setAttribute('readonly','reue')
-
-        
+        displayLinks.setAttribute('readonly','reue')
+    
+        //buttons update
         genrateResumeButton.textContent = 'Edit Resume'
         downloadResumeButton.style.display = 'block'
         copyResumeButton.style.display = 'block'
@@ -423,17 +433,14 @@ genrateResumeButton?.addEventListener('click', resumeGeneratorHandler);
 const downloadButtonHandle = () => {
     
     // Hide other buttons and elements that should not be printed
-    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading && linksContent && skillsContent && toggleButton && toggleButtonlink ) {
+    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading ) {
         genrateResumeButton.style.display = 'none';
         downloadResumeButton.style.display = 'none';
         copyResumeButton.style.display = 'none';
         displayMainHeading.style.display = 'none';
         displayHeading.style.display = 'none';
         navbar.style.display = 'none'
-        linksContent.classList.remove('hidden');
-        skillsContent.classList.remove('hidden');
-       toggleButton.style.display = 'none'
-        toggleButtonlink.style.display = 'none'
+       
 
     }
 
@@ -441,7 +448,7 @@ const downloadButtonHandle = () => {
     window.print();
 
      // show other buttons and elements that should not be printed
-    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading && skillsContent && linksContent && toggleButton && toggleButtonlink) {
+    if (genrateResumeButton && copyResumeButton && downloadResumeButton && displayMainHeading && displayHeading ) {
         genrateResumeButton.style.display = 'block';
         downloadResumeButton.style.display = 'block';
         copyResumeButton.style.display = 'block';
@@ -450,11 +457,7 @@ const downloadButtonHandle = () => {
         navbar.style.display = 'block'
         navbar.style.display = 'flex'
         navbar.style.alignItems = 'center'
-        linksContent.classList.add('hidden');
-        skillsContent.classList.add('hidden') 
-        toggleButton.style.display = 'block'
-        toggleButtonlink.style.display = 'block'
-        
+      
     }
 };
 // Attach event listener to the download btn button
@@ -508,6 +511,7 @@ const displayResumeFromUrl = () => {
             } = JSON.parse(data);
 
             // Set values to display elements
+            displayPhoto.innerHTML = `<img src="${photo}" alt="Profile Picture" style="max-width: 100%;">`;
             if (displayPhoto) displayPhoto.src = photo;
             if (displayName) displayName.textContent = name;
             if (displayEmail) displayEmail.textContent = email;
@@ -522,12 +526,18 @@ const displayResumeFromUrl = () => {
             if (displayEndDate) displayEndDate.textContent = endDate;
             if (displayResponsibilities) displayResponsibilities.textContent = responsibilities;
             if (displaySkills) displaySkills.textContent = skills;
-            if (displayLinkedIn) displayLinkedIn.href = linkedIn;
-            if (displayGithub) displayGithub.href = github;
+
+             const linkHTML = `
+                <div class="links-container">
+                        <a href="${linkedIn}" target="_blank">LinkedIn Profile</a>
+                        <a href="${github}" target="_blank">GitHub Profile</a>
+                </div>`;
+            displayLinks.innerHTML = linkHTML;
 
             // Hide the form and show the resume
             if (formDiv) formDiv.style.display = 'none';
-            if (resumeDiv) resumeDiv.style.display = 'block';
+            if (resumeDiv) resumeDiv.style.display = 'none';
+            if (outputDiv) outputDiv.style.display = 'block';
 
             // Hide elements that should not be visible
             if (displayMainHeading) displayMainHeading.style.display = 'none';
@@ -541,11 +551,14 @@ const displayResumeFromUrl = () => {
             // Handle case where data is not found
             formDiv.style.display = 'none';
             resumeDiv.style.display = 'none';
+            outputDiv.style.display = 'none'
         }
     } else {
         // Handle case where there is no resume key
         formDiv.style.display = 'block';
-        resumeDiv.style.display = 'none';
+        resumeDiv.style.display = 'block';
+        outputDiv.style.display = 'none'
+
 
         // Ensure that all elements are visible if no resume is displayed
         if (displayMainHeading) displayMainHeading.style.display = 'block';

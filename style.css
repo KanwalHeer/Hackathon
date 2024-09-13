@@ -3,18 +3,28 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; 
-    background-color: #f9f9f9; 
-}
-
-
-/* Navigation styles */
-nav {
+    min-height: 100vh;
+    background-color: #f9f9f9;
+  }
+  /* =============== */
+  
+  
+  
+  /* hidden class */
+  .hidden {
+    display: none; 
+  }
+  /* ============ */
+  
+  
+  
+  /* Navigation styles */
+  nav {
     background-color: #5c0858;
     color: white;
     padding: 6px;
@@ -25,119 +35,109 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-
-/* Navigation button for small screens */
-.nav-toggle {
+  }
+  /* Navigation button for small screens */
+  .nav-toggle {
     display: none;
     background-color: #5c0858;
     color: white;
     border: none;
     font-size: 24px;
     cursor: pointer;
-}
-
-
-/* Navigation links */
-.nav-links {
+  }
+  /* Navigation links */
+  .nav-links {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: row;
     gap: 15px;
-}
-
-.nav-links li {
+  }
+  .nav-links li {
     margin: 0;
-}
-
-.nav-links a {
+  }
+  .nav-links a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 8px 12px; 
-}
-
-.nav-links a:hover {
+    padding: 8px 12px;
+  }
+  .nav-links a:hover {
     text-decoration: underline;
-}
-
-
-/* Toggle button for mobile */
-@media (max-width: 768px) {
+  }
+  /* ======================== */
+  
+  
+  
+  /* Toggle button for mobile */
+  @media (max-width: 768px) {
+    /* /* Navigation styles */ */
     .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        width: 100%;
-        background-color: #5c0858;
-        padding: 10px;
-        z-index: 1000;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      background-color: #5c0858;
+      padding: 10px;
+      z-index: 1000;
     }
-
     .nav-links.active {
-        display: flex;
+      display: flex;
     }
-
     .nav-toggle {
-        display: block;
+      display: block;
     }
-}
-
-
-/* Center the content within the body */
-section,
-.resume-container,
-.form-section {
+  }
+  /* ================== */
+  
+  
+  
+  /* sections , form  resumediv,and generator btn  styling */
+  section,
+  .resume-container,
+  .form-section {
     width: 100%;
-    max-width: 800px; 
-    margin: 20px auto; 
-    padding: 20px;
+    max-width: 800px;
+    margin: 5px auto;
+    padding: 3px;
     box-sizing: border-box;
-}
-
-
-/* Center the content within section and resume container */
-section {
+  }
+  section {
     text-align: center;
-}
-
-h1.main-heading {
+  }
+  h1.main-heading {
     color: #4a0746;
     border-bottom: 2px solid #4a0746;
-    padding-bottom: 10px;
-}
-
-.form-section {
-    margin-bottom: 20px;
-}
-
-label {
+    padding-bottom: 2px;
+  }
+  .form-section {
+    margin-bottom: 5px;
+  }
+  label {
     display: block;
     margin-bottom: 5px;
     margin-left: 10px;
     font-weight: bold;
-    text-align: left; 
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-textarea {
-    width: calc(100% - 20px); 
-    padding: 8px;
+    text-align: left;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="url"],
+  textarea {
+    width: calc(100% - 20px);
+    padding: 8px 30px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; 
-}
-
-button.submit-btn {
+    box-sizing: border-box;
+  }
+  
+  button.submit-btn {
     background-color: #5c0858;
     color: white;
     border: none;
@@ -146,54 +146,42 @@ button.submit-btn {
     cursor: pointer;
     border-radius: 4px;
     margin: 10px;
-}
-
-button.submit-btn:hover {
+  }
+  button.submit-btn:hover {
     background-color: #4a0746;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Resume styling */
-.resume-container {
-    text-align: center; /* Center text and elements */
+  }
+  
+  /* Resume styling */
+  .resume-container {
+    text-align: center; 
     border: 2px solid #4a0746;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f5ebf5; 
-    padding: 5px 10px; 
-    border-radius: 8px; 
-}
-
-.resume-header img {
+    background-color: #f5ebf5;
+    padding: 5px 10px;
+    border-radius: 8px;
+  }
+  .resume-header img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 5px;
-}
-
-.resume-section {
+  }
+  .resume-section {
     margin-bottom: 5px;
     padding: 2px 5px;
     border: 1px solid #9a8d99;
-    align-items: center;
-    align-self: center;
-    align-content: center;
-    text-align: center;
-
-}
-
-.resume-section h2 {
+  }
+  .resume-section h2 {
     font-size: 20px;
     margin-bottom: 1px;
-}
-
-
-
-/* Skill button styling */
-.skill-btn {
+  }
+  /* ================= */
+  
+  
+  
+  /* Skill button styling */
+  .skill-btn {
     background-color: #4a0746; /* Dark purple color */
     color: white;
     border: none;
@@ -204,14 +192,29 @@ button.submit-btn:hover {
     margin: 5px;
     align-items: center;
     align-self: center;
-}
-
-.skill-btn:hover {
-    background-color: #3a0636; 
-}
-
-.link-btn {
-    background-color: #4a0746; /* Dark purple color */
+  }
+  .skill-btn:hover {
+    background-color: #3a0636;
+  }
+  .hidden {
+    display: none;
+  }
+  /* =============== */
+  
+  
+  
+  /* link section styling */
+  .links-container {
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 2px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .link-btn {
+    background-color: #4a0746; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -220,23 +223,36 @@ button.submit-btn:hover {
     border-radius: 4px;
     margin: 5px;
     align-self: center;
-}
-
-.link-btn:hover {
-    background-color: #3a0636; 
-}
-
-.cbtn{
-    display: none;
-}
-
-.dbtn{
-    display: none;
-}
-
-/* Share Resume Button */
-.cbtn {
-    background-color: #4a0746; 
+  }
+  .link-btn:hover {
+    background-color: #3a0636;
+  }
+  .links-container {
+    background-color: #f9f3f3;
+    padding: 5px 35px;
+    border-radius: 10px;
+    margin-top:0px;
+    width: fit-content;
+  }
+  .accounts{
+    display: flex;
+    justify-content: center;
+  }
+  /* ============= */
+  
+  
+  
+  /* copy and download btn styling */
+  /* button main div */
+  .btnsDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Share Resume Button */
+  .cbtn {
+    background-color: #4a0746;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -244,15 +260,18 @@ button.submit-btn:hover {
     cursor: pointer;
     border-radius: 4px;
     margin: 10px;
-}
-
-.cbtn:hover {
-    background-color: #3a0636; 
-}
-
-/* Share Resume Button */
-.dbtn {
-    background-color: #4a0746; 
+  }
+  .cbtn:hover {
+    background-color: #3a0636;
+  }
+  .cbtn {
+    display: none;
+  }
+  
+  
+  /* download Resume Button */
+  .dbtn {
+    background-color: #4a0746;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -260,99 +279,100 @@ button.submit-btn:hover {
     cursor: pointer;
     border-radius: 4px;
     margin: 10px;
-}
-
-.dbtn:hover {
-    background-color: #3a0636; 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media print {
+  }
+  .dbtn:hover {
+    background-color: #3a0636;
+  }
+  .dbtn {
+    display: none;
+  }
+  /* ================== */
+  
+  
+  
+  /* print resume styling */
+  @media print {
     body {
-        font-family: Arial, sans-serif; /* Use the same font-family for consistency */
-        margin: 0;
-        padding: 0;
-        align-items: center;
-        text-align: center;
+      font-family: Arial, sans-serif; /* Use the same font-family for consistency */
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      text-align: center;
     }
-
+  
+  
+  /* -------------- */
     .resume-container {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        border: 2px solid #4a0746;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #f5ebf5;
-        padding: 5px 10px;
-        border-radius: 8px;
-        align-items: center;
-
-        
-        
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid #4a0746;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #f5ebf5;
+      padding: 2px 8px;
+      border-radius: 8px;
     }
-
     .resume-header img {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 5px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 5px;
     }
-
     .resume-section {
-        margin-bottom: 5px;
-        padding: 2px 5px;
-        border: 1px solid #9a8d99;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-       justify-content: center;
+      margin-bottom: 5px;
+      padding: 2px 5px;
+      border: 1px solid #9a8d99;
     }
-
     .resume-section h2 {
-        font-size: 20px;
-        margin-bottom: 1px;
+      font-size: 20px;
+      margin-bottom: 1px;
     }
-
-    .hidden {
-        display: none; /* Ensure that hidden sections are not included in the printout */
-        align-items: center;
-    }
-
+    /* ---------------- */
+  
+   
     .nav-links,
     .nav-toggle,
     .cbtn, /* Assuming this is the button to share the resume */
-    .dbtn { /* Assuming this is the download button */
-        display: none; /* Hide these elements in the print view */
-        align-self: center;
+    .dbtn {
+      /* Assuming this is the download button */
+      display: none; /* Hide these elements in the print view */
     }
-
-    /* Ensure any buttons or elements that need to be visible in the print are correctly styled */
-    .skill-btn,
+  /* ----------------- */
+    
+  
+  
     .link-btn {
-        background-color: #4a0746; /* Use the same background color for consistency */
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 4px;
-        margin: 5px;
+      background-color: #4a0746; /* Use the same background color for consistency */
+      color: white;
+      border: none;
+      padding: 5px 8px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin: 5px;
     }
-
-    .skill-btn:hover,
     .link-btn:hover {
-        background-color: #3a0636; /* Ensure hover color consistency */
+      background-color: #3a0636; /* Ensure hover color consistency */
     }
-}
+   /* -------------------- */
+  
+  
+   
+    /* Optional: Adjust font color if necessary for readability */
+    .name,
+    .bio {
+      color: white !important;
+    }
+    a::after {
+      content: " (" attr(href) ")";
+      font-size: 0.9em;
+      color: #540651;
+    }
+    /* Optional: Style the link text for clarity */
+    a {
+      color: #000; /* Ensure the link text is visible */
+    }
+    /* ------------- */
+  }
+  
